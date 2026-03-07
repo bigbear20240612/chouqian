@@ -76,16 +76,16 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* 顶部导航 */}
       <header className="border-b border-border/50 bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center shadow-lg">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-lg">
               <Sparkles className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
+              <h1 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 多功能抽签系统
               </h1>
             </div>
@@ -104,15 +104,15 @@ export default function HomePage() {
       {/* Hero 区域 */}
       <section className="container mx-auto px-4 py-16 text-center">
         <div className="max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-orange-100 to-pink-100 dark:from-orange-900/30 dark:to-pink-900/30 mb-6">
-            <Sparkles className="h-4 w-4 text-orange-600" />
-            <span className="text-sm font-medium text-orange-700 dark:text-orange-300">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 mb-6">
+            <Sparkles className="h-4 w-4 text-blue-600" />
+            <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
               让课堂更有趣
             </span>
           </div>
 
           <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-orange-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               专为课堂设计
             </span>
             <br />
@@ -124,7 +124,7 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="gap-2 shadow-xl hover:shadow-2xl text-base h-12 px-8" asChild>
+            <Button size="lg" className="gap-2 shadow-xl hover:shadow-2xl text-base h-12 px-8 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700" asChild>
               <Link href="/projects/new">
                 <Plus className="h-5 w-5" />
                 创建第一个项目
@@ -205,8 +205,8 @@ export default function HomePage() {
         ) : !projects || projects.length === 0 ? (
           <Card className="border-2 border-dashed">
             <CardContent className="flex flex-col items-center justify-center py-16">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-100 to-pink-100 dark:from-orange-900/20 dark:to-pink-900/20 flex items-center justify-center mb-6">
-                <Sparkles className="h-10 w-10 text-orange-500" />
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 flex items-center justify-center mb-6">
+                <Sparkles className="h-10 w-10 text-blue-500" />
               </div>
               <h4 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
                 还没有任何项目
@@ -248,7 +248,7 @@ export default function HomePage() {
                       <span className="text-sm text-gray-500">
                         点击开始抽签
                       </span>
-                      <div className="flex items-center gap-1 text-orange-600 font-medium">
+                      <div className="flex items-center gap-1 text-blue-600 font-medium">
                         开始
                         <ArrowRight className="h-4 w-4" />
                       </div>
@@ -260,10 +260,10 @@ export default function HomePage() {
 
             {/* 新建项目卡片 */}
             <Link href="/projects/new">
-              <Card className="border-2 border-dashed hover:border-orange-300 hover:bg-orange-50/50 dark:hover:bg-orange-950/20 cursor-pointer h-full flex items-center justify-center min-h-[280px] transition-colors group">
+              <Card className="border-2 border-dashed hover:border-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-950/20 cursor-pointer h-full flex items-center justify-center min-h-[280px] transition-colors group">
                 <CardContent className="flex flex-col items-center justify-center py-8">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-100 to-pink-100 dark:from-orange-900/20 dark:to-pink-900/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Plus className="h-8 w-8 text-orange-500" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Plus className="h-8 w-8 text-blue-500" />
                   </div>
                   <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
                     创建新项目
@@ -283,7 +283,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-orange-500" />
+              <Sparkles className="h-5 w-5 text-blue-500" />
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 多功能抽签系统 - 让课堂更有趣
               </span>

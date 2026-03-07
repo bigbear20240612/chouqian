@@ -113,7 +113,7 @@ export default function NewProjectPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* 顶部导航 */}
       <header className="border-b border-border/50 bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-3">
@@ -140,9 +140,9 @@ export default function NewProjectPage() {
           <div className="flex items-center justify-center mb-12">
             <div className="flex items-center gap-4">
               <StepIndicator number={1} active={step === 1} completed={step > 1} label="基本信息" />
-              <div className={`w-16 h-1 rounded-full ${step > 1 ? "bg-orange-500" : "bg-gray-200 dark:bg-gray-700"}`} />
+              <div className={`w-16 h-1 rounded-full ${step > 1 ? "bg-blue-500" : "bg-gray-200 dark:bg-gray-700"}`} />
               <StepIndicator number={2} active={step === 2} completed={step > 2} label="选择类型" />
-              <div className={`w-16 h-1 rounded-full ${step > 2 ? "bg-orange-500" : "bg-gray-200 dark:bg-gray-700"}`} />
+              <div className={`w-16 h-1 rounded-full ${step > 2 ? "bg-blue-500" : "bg-gray-200 dark:bg-gray-700"}`} />
               <StepIndicator number={3} active={step === 3} completed={false} label="完成配置" />
             </div>
           </div>
@@ -152,7 +152,7 @@ export default function NewProjectPage() {
             <Card className="border-2 shadow-lg">
               <CardHeader>
                 <CardTitle className="text-2xl flex items-center gap-2">
-                  <Sparkles className="h-6 w-6 text-orange-500" />
+                  <Sparkles className="h-6 w-6 text-blue-500" />
                   基本信息
                 </CardTitle>
                 <CardDescription>
@@ -220,8 +220,8 @@ export default function NewProjectPage() {
                         key={pt.value}
                         className={`cursor-pointer transition-all ${
                           type === pt.value
-                            ? "border-2 border-orange-500 shadow-lg"
-                            : "border-2 hover:border-orange-200"
+                            ? "border-2 border-blue-500 shadow-lg"
+                            : "border-2 hover:border-blue-200"
                         }`}
                         onClick={() => setType(pt.value)}
                       >
@@ -229,7 +229,7 @@ export default function NewProjectPage() {
                           <div className="flex items-center justify-between mb-2">
                             <div className="text-4xl">{pt.icon}</div>
                             {type === pt.value && (
-                              <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
+                              <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
                                 <CheckCircle2 className="h-5 w-5 text-white" />
                               </div>
                             )}
@@ -308,7 +308,7 @@ export default function NewProjectPage() {
                         {type === "name" ? "学生名单" : "抽签内容"}
                       </h4>
                       <textarea
-                        className="w-full h-40 px-4 py-3 rounded-xl border-2 border-input bg-background resize-none focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full h-40 px-4 py-3 rounded-xl border-2 border-input bg-background resize-none focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                         placeholder={
                           type === "name"
                             ? "张三\n李四\n王五\n..."
@@ -324,7 +324,7 @@ export default function NewProjectPage() {
                   )}
 
                   {type === "poem" && (
-                    <div className="p-4 bg-orange-50 dark:bg-orange-950/20 rounded-xl border border-orange-200 dark:border-orange-900/30">
+                    <div className="p-4 bg-blue-50 dark:bg-blue-950/20 rounded-xl border border-blue-200 dark:border-blue-900/30">
                       <p className="text-sm text-gray-700 dark:text-gray-300">
                         📚 诗词抽签将使用预置的古诗词库，包含唐诗宋词等经典作品。无需额外配置。
                       </p>
@@ -340,8 +340,8 @@ export default function NewProjectPage() {
                           key={style.value}
                           className={`cursor-pointer transition-all ${
                             uiStyle === style.value
-                              ? "border-2 border-orange-500 shadow-md"
-                              : "border-2 hover:border-orange-200"
+                              ? "border-2 border-blue-500 shadow-md"
+                              : "border-2 hover:border-blue-200"
                           }`}
                           onClick={() => setUiStyle(style.value)}
                         >
@@ -409,15 +409,15 @@ function StepIndicator({
       <div
         className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-base transition-all ${
           completed
-            ? "bg-orange-500 text-white"
+            ? "bg-blue-500 text-white"
             : active
-            ? "bg-orange-500 text-white ring-4 ring-orange-100"
+            ? "bg-blue-500 text-white ring-4 ring-blue-100"
             : "bg-gray-200 dark:bg-gray-700 text-gray-500"
         }`}
       >
         {completed ? <CheckCircle2 className="h-6 w-6" /> : number}
       </div>
-      <span className={`text-xs font-medium ${active ? "text-orange-600" : "text-gray-500"}`}>
+      <span className={`text-xs font-medium ${active ? "text-blue-600" : "text-gray-500"}`}>
         {label}
       </span>
     </div>
