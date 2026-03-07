@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 249 240; /* #FFF9F0 米白色 */
+    --foreground: 44 62 80; /* #2C3E50 深灰色 */
+
+    --card: 255 255 255; /* 纯白色 */
+    --card-foreground: 44 62 80;
+
+    --popover: 255 255 255;
+    --popover-foreground: 44 62 80;
+
+    --primary: 255 107 107; /* #FF6B6B 暖橙色 */
+    --primary-foreground: 255 255 255;
+
+    --secondary: 78 205 196; /* #4ECDC4 天蓝色 */
+    --secondary-foreground: 255 255 255;
+
+    --muted: 245 245 245;
+    --muted-foreground: 127 140 141;
+
+    --accent: 255 230 109; /* #FFE66D 明黄色 */
+    --accent-foreground: 44 62 80;
+
+    --destructive: 231 76 60; /* #E74C3C 红色 */
+    --destructive-foreground: 255 255 255;
+
+    --border: 232 232 232;
+    --input: 232 232 232;
+    --ring: 255 107 107;
+
+    --radius: 12px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  /* 玻璃态效果 */
+  .glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* 渐变背景 */
+  .gradient-primary {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(135deg, #4ECDC4 0%, #7EDCD6 100%);
+  }
+
+  /* 文字渐变 */
+  .text-gradient {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* 弹性动画 */
+  .bounce-click {
+    transition: transform 0.1s ease-out;
+  }
+
+  .bounce-click:active {
+    transform: scale(0.95);
+  }
+
+  /* 悬浮效果 */
+  .hover-lift {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 脉搏动画 */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* 闪烁动画 */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%
+    );
+    background-size: 1000px 100%;
+  }
+
+  /* 隐藏滚动条但保留功能 */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

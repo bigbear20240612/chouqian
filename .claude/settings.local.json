@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --app --no-src --import-alias \"@/*\" --use-npm --no-git --turbopack 2>&1)",
+      "Bash(npm install 2>&1)",
+      "Bash(npm run build 2>&1)",
+      "Bash(npm install autoprefixer 2>&1)",
+      "Bash(git init 2>&1)",
+      "Bash(git add . 2>&1)"
+    ]
+  }
+}
