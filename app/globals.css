@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 248 250 252; /* slate-50 浅灰色 */
+    --background: 241 245 249; /* slate-100 更明显的浅蓝灰色 */
     --foreground: 15 23 42; /* slate-900 深灰色 */
 
     --card: 255 255 255; /* 纯白色 */
@@ -22,7 +22,7 @@
     --muted: 241 245 249;
     --muted-foreground: 100 116 139;
 
-    --accent: 248 250 252; /* slate-50 浅灰色 */
+    --accent: 241 245 249; /* slate-100 浅蓝灰色 */
     --accent-foreground: 15 23 42;
 
     --destructive: 239 68 68; /* red-500 */
@@ -44,7 +44,12 @@
   body {
     @apply text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background: transparent;
+    background: transparent !important;
+  }
+
+  /* 确保根元素也是透明背景 */
+  html {
+    background: transparent !important;
   }
 }
 
