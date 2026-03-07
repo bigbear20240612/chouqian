@@ -9,16 +9,29 @@ import * as schema from "./schema";
 
 // 创建 mock db 用于开发环境（无数据库时）
 const createMockDb = () => {
-  const mockObj = new Proxy({}, {
-    get: () => {
-      const fn = async () => {
-        console.warn("Database not configured. Returning empty result.");
-        return [];
-      };
-      return fn;
-    }
-  }) as any;
-  return mockObj;
+  const createChainable = () => {
+    const result: any = async () => [];
+
+    // 链式调用方法
+    result.from = () => createChainable();
+    result.where = () => createChainable();
+    result.orderBy = () => createChainable();
+    result.limit = () => createChainable();
+    result.offset = () => createChainable();
+    result.values = () => createChainable();
+    result.set = () => createChainable();
+    result.returning = () => createChainable();
+    result.execute = () => Promise.resolve([]);
+
+    return result;
+  };
+
+  return {
+    select: () => createChainable(),
+    insert: () => createChainable(),
+    update: () => createChainable(),
+    delete: () => createChainable(),
+  } as any;
 };
 
 let dbInstance: any = null;
@@ -26,6 +39,7 @@ let dbInstance: any = null;
 export function getDb() {
   if (!process.env.DATABASE_URL) {
     // 开发环境无数据库时返回 mock
+    console.warn("⚠️ DATABASE_URL not set. Using mock database (no data persistence).");
     return createMockDb();
   }
   if (!dbInstance) {
