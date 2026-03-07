@@ -5,15 +5,11 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "多功能抽签系统 - 让课堂更有趣",
-  description: "一个功能完善、界面活泼可爱的抽签系统，专为课堂教学活动设计",
+  title: "抽签系统 - 简约高效",
+  description: "极简设计的课堂抽签工具",
   icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: [
-      { url: "/apple-icon.svg", type: "image/svg+xml" },
-    ],
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
   },
 };
 
@@ -24,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className="scroll-smooth">
-      <body className={`${inter.className} bg-slate-50`}>
+      <body className={`${inter.className} bg-white`}>
         {children}
       </body>
     </html>

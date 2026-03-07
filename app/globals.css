@@ -4,35 +4,35 @@
 
 @layer base {
   :root {
-    --background: 241 245 249; /* slate-100 更明显的浅蓝灰色 */
-    --foreground: 15 23 42; /* slate-900 深灰色 */
+    --background: 255 255 255; /* 纯白 */
+    --foreground: 0 0 0; /* 纯黑 */
 
-    --card: 255 255 255; /* 纯白色 */
-    --card-foreground: 15 23 42;
+    --card: 255 255 255;
+    --card-foreground: 0 0 0;
 
     --popover: 255 255 255;
-    --popover-foreground: 15 23 42;
+    --popover-foreground: 0 0 0;
 
-    --primary: 59 130 246; /* blue-500 蓝色 */
-    --primary-foreground: 255 255 255;
+    --primary: 0 0 0; /* 黑色 */
+    --primary-foreground: 255 255 255; /* 白色 */
 
-    --secondary: 99 102 241; /* indigo-500 靛蓝色 */
+    --secondary: 128 128 128; /* 灰色 */
     --secondary-foreground: 255 255 255;
 
-    --muted: 241 245 249;
-    --muted-foreground: 100 116 139;
+    --muted: 245 245 245;
+    --muted-foreground: 128 128 128;
 
-    --accent: 241 245 249; /* slate-100 浅蓝灰色 */
-    --accent-foreground: 15 23 42;
+    --accent: 245 245 245;
+    --accent-foreground: 0 0 0;
 
-    --destructive: 239 68 68; /* red-500 */
+    --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
 
-    --border: 226 232 240;
-    --input: 226 232 240;
-    --ring: 59 130 246;
+    --border: 209 213 219; /* gray-300 */
+    --input: 209 213 219;
+    --ring: 0 0 0;
 
-    --radius: 12px;
+    --radius: 0px; /* 直角 */
   }
 }
 
@@ -42,97 +42,28 @@
   }
 
   body {
-    @apply text-foreground;
+    @apply text-foreground bg-white;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background: transparent !important;
-  }
-
-  /* 确保根元素也是透明背景 */
-  html {
-    background: transparent !important;
   }
 }
 
 @layer utilities {
-  /* 玻璃态效果 */
-  .glass {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+  /* 直角设计 */
+  .square-corners {
+    border-radius: 0;
   }
 
-  /* 渐变背景 - 蓝色系 */
-  .gradient-primary {
-    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  /* 极简阴影 */
+  .shadow-minimal {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
-  .gradient-secondary {
-    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+  /* 黑白渐变 */
+  .gradient-bw {
+    background: linear-gradient(135deg, #000 0%, #333 100%);
   }
 
-  /* 文字渐变 - 蓝色系 */
-  .text-gradient {
-    background: linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* 弹性动画 */
-  .bounce-click {
-    transition: transform 0.1s ease-out;
-  }
-
-  .bounce-click:active {
-    transform: scale(0.95);
-  }
-
-  /* 悬浮效果 */
-  .hover-lift {
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  /* 脉搏动画 */
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-    }
-    50% {
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
-    }
-  }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
-  }
-
-  /* 闪烁动画 */
-  @keyframes shimmer {
-    0% {
-      background-position: -1000px 0;
-    }
-    100% {
-      background-position: 1000px 0;
-    }
-  }
-
-  .animate-shimmer {
-    animation: shimmer 2s infinite;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.4) 50%,
-      transparent 100%
-    );
-    background-size: 1000px 100%;
-  }
-
-  /* 隐藏滚动条但保留功能 */
+  /* 隐藏滚动条 */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;

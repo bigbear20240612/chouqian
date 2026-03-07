@@ -7,7 +7,6 @@ import {
   RotateCcw,
   History as HistoryIcon,
   Sparkles,
-  Settings,
   BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -134,67 +133,47 @@ export default function DrawPage() {
 
   if (!currentProject) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">加载中...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+          <p className="mt-4 text-gray-600">加载中...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      {/* 顶部导航 */}
-      <header className="border-b border-border/50 bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-4 py-3">
+    <div className="min-h-screen bg-white">
+      {/* 极简导航 */}
+      <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={() => router.push("/")}>
+              <Button variant="ghost" size="icon" onClick={() => router.push("/")} className="text-black">
                 <ArrowLeft className="h-5 w-5" />
               </Button>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-lg">
+                <div className="w-10 h-10 rounded-lg bg-black flex items-center justify-center">
                   <Sparkles className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                    {currentProject.name}
-                  </h1>
+                  <h1 className="text-xl font-bold text-black">{currentProject.name}</h1>
                   {currentProject.description && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-1">
-                      {currentProject.description}
-                    </p>
+                    <p className="text-sm text-gray-600 line-clamp-1">{currentProject.description}</p>
                   )}
                 </div>
               </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Button
-                variant={showHistory ? "default" : "outline"}
-                size="sm"
-                onClick={() => setShowHistory(!showHistory)}
-                className="hidden sm:flex"
-              >
-                <HistoryIcon className="h-4 w-4 mr-2" />
-                历史
-                {historyRecords.length > 0 && (
-                  <span className="ml-1 px-2 py-0.5 rounded-full bg-white/20 text-xs">
-                    {historyRecords.length}
-                  </span>
-                )}
-              </Button>
             </div>
           </div>
         </div>
       </header>
 
       {/* 主内容 */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* 左侧抽签区域 */}
           <div className="lg:col-span-2">
-            <Card className="border-2 shadow-lg">
+            <Card className="border border-gray-300 bg-white">
               <CardContent className="pt-8">
                 {/* 风格切换 */}
                 <div className="flex justify-center gap-2 mb-8">
@@ -202,25 +181,31 @@ export default function DrawPage() {
                     variant={selectedUIStyle === "card" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedUIStyle("card")}
-                    className="flex-1 max-w-[100px]"
+                    className={`flex-1 max-w-[100px] rounded-none ${
+                      selectedUIStyle === "card" ? "bg-black text-white" : "border-gray-300 text-black"
+                    }`}
                   >
-                    🎴 卡片
+                    卡片
                   </Button>
                   <Button
                     variant={selectedUIStyle === "stick" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedUIStyle("stick")}
-                    className="flex-1 max-w-[100px]"
+                    className={`flex-1 max-w-[100px] rounded-none ${
+                      selectedUIStyle === "stick" ? "bg-black text-white" : "border-gray-300 text-black"
+                    }`}
                   >
-                    🎋 竹签
+                    竹签
                   </Button>
                   <Button
                     variant={selectedUIStyle === "wheel" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedUIStyle("wheel")}
-                    className="flex-1 max-w-[100px]"
+                    className={`flex-1 max-w-[100px] rounded-none ${
+                      selectedUIStyle === "wheel" ? "bg-black text-white" : "border-gray-300 text-black"
+                    }`}
                   >
-                    🎡 转盘
+                    转盘
                   </Button>
                 </div>
 
@@ -235,7 +220,7 @@ export default function DrawPage() {
                     size="lg"
                     onClick={handleDraw}
                     disabled={isDrawing}
-                    className="flex-1 max-w-[300px] shadow-xl hover:shadow-2xl text-base h-14"
+                    className="flex-1 max-w-[300px] bg-black text-white hover:bg-gray-800 text-base h-14 rounded-none"
                   >
                     {isDrawing ? (
                       <>
@@ -260,7 +245,7 @@ export default function DrawPage() {
                       variant="outline"
                       onClick={handleReset}
                       disabled={isDrawing}
-                      className="h-14"
+                      className="h-14 rounded-none border-gray-300 text-black"
                     >
                       <RotateCcw className="h-4 w-4 mr-2" />
                       重置
@@ -272,48 +257,42 @@ export default function DrawPage() {
           </div>
 
           {/* 右侧历史记录 */}
-          <div className={`lg:col-span-1 transition-all ${showHistory ? "block" : "hidden lg:block"}`}>
-            <Card className="sticky top-24 shadow-lg border-2">
+          <div className="lg:col-span-1">
+            <Card className="sticky top-24 border border-gray-300 bg-white">
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <HistoryIcon className="h-5 w-5 text-blue-500" />
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                      历史记录
-                    </h3>
+                    <HistoryIcon className="h-5 w-5 text-black" />
+                    <h3 className="text-lg font-bold text-black">历史记录</h3>
                   </div>
                   {historyRecords.length > 0 && (
-                    <span className="text-sm text-gray-500">
-                      {historyRecords.length} 次
-                    </span>
+                    <span className="text-sm text-gray-600">{historyRecords.length} 次</span>
                   )}
                 </div>
               </CardHeader>
               <CardContent>
                 {historyRecords.length === 0 ? (
                   <div className="text-center py-12">
-                    <BarChart3 className="h-12 w-12 mx-auto mb-4 text-gray-300 dark:text-gray-600" />
-                    <p className="text-sm text-gray-500 dark:text-gray-400">暂无记录</p>
-                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                      开始抽签后将显示历史记录
-                    </p>
+                    <BarChart3 className="h-12 w-12 mx-auto mb-4 text-gray-300" />
+                    <p className="text-sm text-gray-600">暂无记录</p>
+                    <p className="text-xs text-gray-500 mt-1">开始抽签后将显示历史记录</p>
                   </div>
                 ) : (
                   <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
                     {historyRecords.map((record, index) => (
                       <div
                         key={record.id}
-                        className="p-3 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-100 dark:border-blue-900/30"
+                        className="p-3 bg-gray-50 rounded-lg border border-gray-200"
                       >
                         <div className="flex items-start justify-between mb-1">
-                          <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
+                          <span className="text-xs font-medium text-black">
                             #{historyRecords.length - index}
                           </span>
-                          <span className="text-xs text-gray-500">
+                          <span className="text-xs text-gray-600">
                             {formatDateTime(record.drawnAt)}
                           </span>
                         </div>
-                        <p className="font-semibold text-gray-900 dark:text-gray-100 break-words text-base">
+                        <p className="font-semibold text-black break-words text-base">
                           {Array.isArray(record.result.value)
                             ? record.result.value.join(", ")
                             : String(record.result.value)}
