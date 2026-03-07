@@ -13,7 +13,32 @@
       "Bash(git add docs/PROGRESS.md && git commit -m \"docs: 更新进度文档到 v1.1.0\n\n更新内容：\n- 添加阶段 8：UI 重新设计\n- 记录所有 UI 优化内容\n- 添加设计系统说明（色彩、元素）\n- 更新功能统计和项目统计\n- 记录 v1.1.0 版本变更日志\n- 添加下一步计划\n\n版本：v1.1.0 - UI 重新设计\" 2>&1)",
       "Bash(pkill -f \"next dev\" 2>&1; echo \"清理旧进程...\" 2>&1)",
       "Bash(curl -s http://localhost:3000 | head -n 100 2>&1)",
-      "Bash(git add -A && git commit -m \"fix: 修改配色方案，使用舒适的蓝色系\n\n修改内容：\n- 将橙色渐变改为蓝色系（from-blue-500 to-indigo-500）\n- 背景从橙色改为浅蓝色系（from-slate-50 via-white to-blue-50）\n- 所有橙色元素改为蓝色（按钮、图标、边框等）\n- 统一使用蓝色主题，视觉更舒适\n\n优化：\n- 减少刺眼的黄色/橙色\n- 使用柔和的蓝色渐变\n- 保持良好的视觉层次\n- 更护眼的配色方案\" 2>&1)"
+      "Bash(git add -A && git commit -m \"fix: 修改配色方案，使用舒适的蓝色系\n\n修改内容：\n- 将橙色渐变改为蓝色系（from-blue-500 to-indigo-500）\n- 背景从橙色改为浅蓝色系（from-slate-50 via-white to-blue-50）\n- 所有橙色元素改为蓝色（按钮、图标、边框等）\n- 统一使用蓝色主题，视觉更舒适\n\n优化：\n- 减少刺眼的黄色/橙色\n- 使用柔和的蓝色渐变\n- 保持良好的视觉层次\n- 更护眼的配色方案\" 2>&1)",
+      "Bash(pkill -f \"next dev\" 2>&1 && echo \"已停止开发服务器\" 2>&1)",
+      "Bash(curl -s http://localhost:3000 | grep -o \"from-[a-z]*-[0-9]* to-[a-z]*-[0-9]*\" | head -10 2>&1)",
+      "Bash(curl -s http://localhost:3000 | grep -i \"gradient\" | head -5 2>&1)",
+      "Bash(pkill -f \"next dev\" 2>&1; rm -rf .next 2>&1; echo \"缓存已清理\" 2>&1)",
+      "Bash(curl -s http://localhost:3000 | grep -o \"from-slate-50\" 2>&1)",
+      "Bash(curl -s http://localhost:3000 | grep \"from-orange\" | head -1 2>&1)",
+      "Bash(pkill -9 -f \"next dev\" && rm -rf .next && rm -rf node_modules/.cache)",
+      "Bash(rm -rf .next/dev && pkill -9 -f \"next\")",
+      "Bash(curl -s http://localhost:3000 | grep -o 'min-h-screen bg-gradient[^\"]*' | head -1)",
+      "Bash(pkill -9 -f \"next\" && sleep 2)",
+      "Bash(pkill -9 -f \"next\" && sleep 2 && rm -rf .next)",
+      "Bash(pkill -9 -f \"next\")",
+      "Bash(sleep 5 && curl -s http://localhost:3000 | grep -o 'min-h-screen bg-gradient[^\"]*' | head -1)",
+      "Bash(curl -s http://localhost:3000 | grep -i \"orange\\\\|teal\" | head -5)",
+      "Bash(ls /root/vibcoding/case3/.next/static/chunks/*.css | head -3)",
+      "Bash(pkill -9 node; rm -rf .next; sleep 2 && npm run build 2>&1 | tail -40)",
+      "Bash(pkill -9 node)",
+      "Bash(curl -s http://localhost:3001 | grep -o 'min-h-screen bg-gradient[^\"]*' | head -1)",
+      "Bash(curl -s http://localhost:3001 | grep -i \"orange\\\\|teal\\\\|slate\\\\|blue\" | head -3)",
+      "Bash(curl -s http://localhost:3001 | head -20)",
+      "Bash(curl -s http://localhost:3002 > /dev/null && sleep 5 && tail -20 /tmp/dev2.log)",
+      "Bash(find /root/vibcoding/case3/.next -name \"*.js\" -newer /root/vibcoding/case3/app/page.tsx -exec grep -l \"蓝色主题\" {} \\\\; 2>/dev/null | head -3)",
+      "Bash(curl -s http://localhost:3002 2>&1 | grep -o '<body[^>]*>' | head -1)",
+      "Bash(curl -s http://localhost:3002 2>&1 | grep -E \"\\(from-slate|from-orange|from-blue\\)\" | head -2)",
+      "Bash(git add -A && git status)"
     ]
   }
 }

@@ -31,17 +31,17 @@ const PROJECT_ICONS: Record<string, React.ReactNode> = {
 // 项目颜色映射
 const PROJECT_COLORS: Record<string, string> = {
   number: "from-blue-500 to-cyan-500",
-  name: "from-pink-500 to-rose-500",
-  poem: "from-amber-500 to-orange-500",
-  custom: "from-emerald-500 to-teal-500",
+  name: "from-blue-600 to-indigo-600",
+  poem: "from-indigo-500 to-purple-500",
+  custom: "from-cyan-500 to-blue-500",
 };
 
 // 项目类型标签
 const PROJECT_LABELS: Record<string, { text: string; color: string }> = {
   number: { text: "数字抽签", color: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300" },
-  name: { text: "姓名抽签", color: "bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300" },
-  poem: { text: "诗词抽签", color: "bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300" },
-  custom: { text: "自定义", color: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300" },
+  name: { text: "姓名抽签", color: "bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300" },
+  poem: { text: "诗词抽签", color: "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300" },
+  custom: { text: "自定义", color: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900 dark:text-cyan-300" },
 };
 
 export default function HomePage() {
@@ -77,7 +77,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      {/* 顶部导航 */}
+      {/* 主页 - 蓝色主题 */}
       <header className="border-b border-border/50 bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -169,7 +169,7 @@ export default function HomePage() {
 
           <Card className="border-2 hover:shadow-lg transition-shadow">
             <CardHeader>
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center mb-4">
                 <Shield className="h-6 w-6 text-white" />
               </div>
               <CardTitle>数据安全</CardTitle>
@@ -199,7 +199,7 @@ export default function HomePage() {
 
         {isLoading ? (
           <div className="text-center py-16">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
             <p className="mt-4 text-gray-500 dark:text-gray-400">加载中...</p>
           </div>
         ) : !projects || projects.length === 0 ? (
@@ -226,7 +226,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <Link key={project.id} href={`/draw/${project.id}`}>
-                <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full border-2 hover:border-orange-200">
+                <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full border-2 hover:border-blue-200">
                   <CardHeader>
                     <div className="flex items-start justify-between mb-4">
                       <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${PROJECT_COLORS[project.type] || PROJECT_COLORS.custom} flex items-center justify-center text-white shadow-lg`}>

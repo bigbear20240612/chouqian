@@ -17,9 +17,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className={inter.className}>
-        <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   );
