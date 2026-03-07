@@ -9,28 +9,42 @@ import * as schema from "./schema";
 
 // 创建 mock db 用于开发环境（无数据库时）
 const createMockDb = () => {
-  const createChainable = () => {
-    const result: any = async () => [];
-
-    // 链式调用方法
-    result.from = () => createChainable();
-    result.where = () => createChainable();
-    result.orderBy = () => createChainable();
-    result.limit = () => createChainable();
-    result.offset = () => createChainable();
-    result.values = () => createChainable();
-    result.set = () => createChainable();
-    result.returning = () => createChainable();
+  // 创建最终的查询结果
+  const createQueryResult = () => {
+    const result = async () => [];
+    result.values = () => createQueryResult();
     result.execute = () => Promise.resolve([]);
+    result.then = (onFulfilled: any) => Promise.resolve([]).then(onFulfilled);
+    return result;
+  };
+
+  // 创建链式调用对象
+  const createChainable = (initialValue: any = []) => {
+    const result: any = async () => Array.isArray(initialValue) ? initialValue : [];
+
+    // 链式调用方法 - 都返回同一个对象
+    result.from = () => createChainable(initialValue);
+    result.where = () => createChainable(initialValue);
+    result.orderBy = () => createChainable(initialValue);
+    result.limit = () => createChainable(initialValue);
+    result.offset = () => createChainable(initialValue);
+    result.values = () => createChainable(initialValue);
+    result.set = () => createChainable(initialValue);
+    result.returning = () => createChainable(initialValue);
+
+    // 执行方法
+    result.execute = () => Promise.resolve([]);
+    result.then = (onFulfilled: any) =>
+      Promise.resolve(Array.isArray(initialValue) ? initialValue : []).then(onFulfilled);
 
     return result;
   };
 
   return {
-    select: () => createChainable(),
-    insert: () => createChainable(),
-    update: () => createChainable(),
-    delete: () => createChainable(),
+    select: () => createChainable([]),
+    insert: () => createChainable([]),
+    update: () => createChainable([]),
+    delete: () => createChainable([]),
   } as any;
 };
 

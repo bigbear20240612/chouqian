@@ -37,11 +37,14 @@ export default function HomePage() {
     try {
       const res = await fetch("/api/projects");
       const data = await res.json();
-      if (data.success) {
+      if (data.success && Array.isArray(data.data)) {
         setProjects(data.data);
+      } else {
+        setProjects([]);
       }
     } catch (error) {
       console.error("获取项目列表失败:", error);
+      setProjects([]);
     } finally {
       setIsLoading(false);
     }
@@ -102,7 +105,7 @@ export default function HomePage() {
         <div className="mb-6 flex items-center justify-between">
           <h3 className="text-2xl font-bold">我的项目</h3>
           <span className="text-sm text-muted-foreground">
-            共 {projects.length} 个项目
+            共 {projects?.length || 0} 个项目
           </span>
         </div>
 
@@ -111,7 +114,7 @@ export default function HomePage() {
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             <p className="mt-4 text-muted-foreground">加载中...</p>
           </div>
-        ) : projects.length === 0 ? (
+        ) : !projects || projects.length === 0 ? (
           <Card className="border-dashed border-2">
             <CardContent className="flex flex-col items-center justify-center py-16">
               <Sparkles className="h-16 w-16 text-muted-foreground/50 mb-4" />
@@ -126,7 +129,7 @@ export default function HomePage() {
           </Card>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
+            {projects?.map((project) => (
               <Link key={project.id} href={`/draw/${project.id}`}>
                 <Card className="hover-lift cursor-pointer h-full">
                   <CardHeader>
