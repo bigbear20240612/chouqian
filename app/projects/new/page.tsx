@@ -308,7 +308,7 @@ export default function NewProjectPage() {
                         {type === "name" ? "学生名单" : "抽签内容"}
                       </h4>
                       <textarea
-                        className="w-full h-40 px-4 py-3 rounded-xl border-2 border-input bg-background resize-none focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                        className="w-full h-40 px-4 py-3 rounded-xl border-2 border-input bg-white resize-none focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                         placeholder={
                           type === "name"
                             ? "张三\n李四\n王五\n..."
