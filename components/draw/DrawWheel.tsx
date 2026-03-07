@@ -102,7 +102,7 @@ export function DrawWheel({ isDrawing, result, onComplete }: DrawWheelProps) {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-sm text-muted-foreground mb-3 font-medium"
+                className="text-sm text-gray-500 mb-3 font-medium"
               >
                 🎉 抽签结果
               </motion.p>
@@ -137,8 +137,8 @@ export function DrawWheel({ isDrawing, result, onComplete }: DrawWheelProps) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
           >
-            <div className="w-72 h-72 rounded-full bg-gradient-to-br from-muted to-muted/50 shadow-lg flex items-center justify-center border-8 border-white/50">
-              <div className="text-center text-muted-foreground">
+            <div className="w-72 h-72 rounded-full bg-gradient-to-br from-gray-100 to-gray-200/50 shadow-lg flex items-center justify-center border-8 border-white/50">
+              <div className="text-center text-gray-500">
                 <Activity className="h-16 w-16 mx-auto mb-4 opacity-50" />
                 <p>点击开始抽签</p>
               </div>

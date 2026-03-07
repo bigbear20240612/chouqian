@@ -85,8 +85,8 @@ export function DrawCard({ isDrawing, result, onComplete }: DrawCardProps) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
           >
-            <div className="w-64 h-64 rounded-3xl bg-gradient-to-br from-muted to-muted/80 shadow-lg flex items-center justify-center border-2 border-dashed border-muted-foreground/30">
-              <div className="text-center text-muted-foreground">
+            <div className="w-64 h-64 rounded-3xl bg-gradient-to-br from-gray-100 to-gray-200/80 shadow-lg flex items-center justify-center border-2 border-dashed border-gray-400/30">
+              <div className="text-center text-gray-500">
                 <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-50" />
                 <p>点击开始抽签</p>
               </div>

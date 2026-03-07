@@ -115,7 +115,8 @@
       "Bash(curl -s -X POST http://localhost:3000/api/draw \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"projectId\":\"g53wi7mt57gmmgm3qxf\",\"count\":1}' && echo \"\" && \\\\\ncurl -s \"http://localhost:3000/api/draw?projectId=g53wi7mt57gmmgm3qxf&limit=10\")",
       "Bash(curl -s http://localhost:3000/api/projects | python3 -m json.tool | head -15 && echo \"...\" && \\\\\ncurl -s \"http://localhost:3000/api/draw?projectId=g53wi7mt57gmmgm3qxf&limit=3\" | python3 -m json.tool | head -20)",
       "Bash(curl -s -X POST http://localhost:3000/api/draw \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"projectId\":\"c5rjxdgf8qdmmgmhf6b\",\"count\":1}' && echo \"\" && \\\\\ncurl -s \"http://localhost:3000/api/draw?projectId=c5rjxdgf8qdmmgmhf6b&limit=3\" | python3 -m json.tool)",
-      "Bash(git add -A && git commit -m \"fix: 修复mock数据库的链式调用和表识别问题\n\n- 修复insert/select/update/delete方法正确传递table参数\n- 修复Promise执行时序问题，延迟execute\\(\\)调用\n- 使用列名检查来识别表\\(drawProjects/drawRecords/activityLogs\\)\n- 正确处理Drizzle ORM的where SQL表达式\n- 添加预置数据以方便开发测试\n- 清理所有调试日志\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")"
+      "Bash(git add -A && git commit -m \"fix: 修复mock数据库的链式调用和表识别问题\n\n- 修复insert/select/update/delete方法正确传递table参数\n- 修复Promise执行时序问题，延迟execute\\(\\)调用\n- 使用列名检查来识别表\\(drawProjects/drawRecords/activityLogs\\)\n- 正确处理Drizzle ORM的where SQL表达式\n- 添加预置数据以方便开发测试\n- 清理所有调试日志\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")",
+      "Bash(git add -A && git commit -m \"fix: 将muted颜色改为明确的灰色以避免暖色调\n\n- DrawCard: from-muted to-muted/80 -> from-gray-100 to-gray-200/80\n- DrawCard: text-muted-foreground -> text-gray-500\n- DrawCard: border-muted-foreground/30 -> border-gray-400/30\n- DrawWheel: text-muted-foreground -> text-gray-500\n- DrawWheel: from-muted to-muted/50 -> from-gray-100 to-gray-200/50\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")"
     ]
   }
 }
