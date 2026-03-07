@@ -88,12 +88,12 @@ export function DrawWheel({ isDrawing, result, onComplete }: DrawWheelProps) {
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
             className="w-full max-w-md"
           >
-            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl p-8 shadow-2xl border-4 border-primary/20 text-center">
+            <div className="bg-gradient-to-br from-black/10 to-gray-800/10 rounded-3xl p-8 shadow-2xl border-4 border-black/20 text-center">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary mx-auto mb-6 flex items-center justify-center shadow-lg"
+                className="w-20 h-20 rounded-full bg-gradient-to-br from-black to-gray-800 mx-auto mb-6 flex items-center justify-center shadow-lg"
               >
                 <Activity className="h-10 w-10 text-white" />
               </motion.div>

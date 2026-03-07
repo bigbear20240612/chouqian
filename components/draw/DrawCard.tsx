@@ -58,7 +58,7 @@ export function DrawCard({ isDrawing, result, onComplete }: DrawCardProps) {
             className="relative"
           >
             <motion.div
-              className="w-80 h-64 rounded-3xl bg-gradient-to-br from-secondary to-secondary/80 shadow-2xl flex items-center justify-center p-8"
+              className="w-80 h-64 rounded-3xl bg-gradient-to-br from-black to-gray-800 shadow-2xl flex items-center justify-center p-8"
               initial={{ rotateY: 90 }}
               animate={{ rotateY: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
