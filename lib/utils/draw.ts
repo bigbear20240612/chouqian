@@ -133,6 +133,13 @@ export function executeDraw(config: DrawConfig, count = 1): DrawResult {
   if (config.min !== undefined && config.max !== undefined) {
     // 数字抽签
     return drawNumber(config, count);
+  } else if (config.isPoem) {
+    // 诗词抽签 - 使用预置诗词库
+    const poemConfig = {
+      ...config,
+      items: PRESET_POEMS.map((p) => `${p.title} - ${p.author}\n${p.content}`),
+    };
+    return drawFromList(poemConfig, count);
   } else if (config.items && config.items.length > 0) {
     // 列表抽签
     return drawFromList(config, count);

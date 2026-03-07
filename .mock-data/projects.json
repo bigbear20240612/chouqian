@@ -35,5 +35,31 @@
     "uiStyle": "card",
     "createdAt": "2026-03-07T18:08:25.441Z",
     "updatedAt": "2026-03-07T18:08:25.441Z"
+  },
+  {
+    "id": "lfap6624uhemmgn2qfd",
+    "createdAt": "2026-03-07T18:10:39.048Z",
+    "updatedAt": "2026-03-07T18:10:39.048Z",
+    "name": "2333",
+    "description": "56655",
+    "type": "poem",
+    "config": {
+      "items": [],
+      "drawCount": 1
+    },
+    "uiStyle": "card"
+  },
+  {
+    "id": "tp2bi30uxahmmgn5u6o",
+    "createdAt": "2026-03-07T18:13:03.888Z",
+    "updatedAt": "2026-03-07T18:13:03.888Z",
+    "name": "诗词抽签测试",
+    "description": "测试诗词抽签",
+    "type": "poem",
+    "config": {
+      "isPoem": true,
+      "drawCount": 1
+    },
+    "uiStyle": "card"
   }
 ]

@@ -69,8 +69,15 @@ export default function NewProjectPage() {
         config.max = parseInt(max);
         config.allowRepeat = true;
         config.drawCount = 1;
+      } else if (type === "poem") {
+        // 诗词抽签使用预置数据，这里暂时不设置items
+        // 实际抽签时应该使用预置的诗词库
+        config.drawCount = 1;
+        // 标记为poem类型，以便后端识别
+        config.isPoem = true;
       } else {
-        config.items = items ? items.split("\\n").filter((i) => i.trim()) : [];
+        // name 和 custom 类型使用用户输入的items
+        config.items = items ? items.split("\n").filter((i) => i.trim()) : [];
         config.drawCount = 1;
       }
 
