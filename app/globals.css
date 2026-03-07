@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 255 249 240; /* #FFF9F0 米白色 */
-    --foreground: 44 62 80; /* #2C3E50 深灰色 */
+    --background: 248 250 252; /* slate-50 浅灰色 */
+    --foreground: 15 23 42; /* slate-900 深灰色 */
 
     --card: 255 255 255; /* 纯白色 */
-    --card-foreground: 44 62 80;
+    --card-foreground: 15 23 42;
 
     --popover: 255 255 255;
-    --popover-foreground: 44 62 80;
+    --popover-foreground: 15 23 42;
 
-    --primary: 255 107 107; /* #FF6B6B 暖橙色 */
+    --primary: 59 130 246; /* blue-500 蓝色 */
     --primary-foreground: 255 255 255;
 
-    --secondary: 78 205 196; /* #4ECDC4 天蓝色 */
+    --secondary: 99 102 241; /* indigo-500 靛蓝色 */
     --secondary-foreground: 255 255 255;
 
-    --muted: 245 245 245;
-    --muted-foreground: 127 140 141;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
 
-    --accent: 255 230 109; /* #FFE66D 明黄色 */
-    --accent-foreground: 44 62 80;
+    --accent: 248 250 252; /* slate-50 浅灰色 */
+    --accent-foreground: 15 23 42;
 
-    --destructive: 231 76 60; /* #E74C3C 红色 */
+    --destructive: 239 68 68; /* red-500 */
     --destructive-foreground: 255 255 255;
 
-    --border: 232 232 232;
-    --input: 232 232 232;
-    --ring: 255 107 107;
+    --border: 226 232 240;
+    --input: 226 232 240;
+    --ring: 59 130 246;
 
     --radius: 12px;
   }
@@ -42,8 +42,9 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background: transparent;
   }
 }
 
@@ -55,18 +56,18 @@
     -webkit-backdrop-filter: blur(10px);
   }
 
-  /* 渐变背景 */
+  /* 渐变背景 - 蓝色系 */
   .gradient-primary {
-    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
   }
 
   .gradient-secondary {
-    background: linear-gradient(135deg, #4ECDC4 0%, #7EDCD6 100%);
+    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
   }
 
-  /* 文字渐变 */
+  /* 文字渐变 - 蓝色系 */
   .text-gradient {
-    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+    background: linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -94,10 +95,10 @@
   /* 脉搏动画 */
   @keyframes pulse-glow {
     0%, 100% {
-      box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+      box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
     }
     50% {
-      box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
     }
   }
 
