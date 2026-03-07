@@ -36,8 +36,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 执行抽签
-    const result = executeDraw(project.config as any, count);
+    // 执行抽签 - 传递项目类型以便识别poem类型
+    const result = executeDraw(project.config as any, count, project.type);
 
     // 记录抽签结果
     await db.insert(drawRecords).values({

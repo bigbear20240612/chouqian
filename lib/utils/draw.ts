@@ -126,14 +126,15 @@ export function drawMultiple(config: DrawConfig, count: number): DrawResult[] {
  * 执行抽签（根据配置自动选择抽签方式）
  * @param config 抽签配置
  * @param count 抽取数量
+ * @param projectType 项目类型（可选，用于识别poem类型）
  * @returns 抽签结果
  */
-export function executeDraw(config: DrawConfig, count = 1): DrawResult {
+export function executeDraw(config: DrawConfig, count = 1, projectType?: string): DrawResult {
   // 判断抽签类型
   if (config.min !== undefined && config.max !== undefined) {
     // 数字抽签
     return drawNumber(config, count);
-  } else if (config.isPoem) {
+  } else if (config.isPoem || projectType === "poem") {
     // 诗词抽签 - 使用预置诗词库
     const poemConfig = {
       ...config,

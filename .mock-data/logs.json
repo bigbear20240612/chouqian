@@ -77,5 +77,54 @@
         }
       }
     }
+  },
+  {
+    "id": "wljzw05jzqmmgn7ia6",
+    "createdAt": "2026-03-07T18:14:21.774Z",
+    "updatedAt": "2026-03-07T18:14:21.774Z",
+    "level": "error",
+    "action": "draw_failed",
+    "details": "抽签失败",
+    "metadata": {
+      "error": {}
+    }
+  },
+  {
+    "id": "2bwj4rznxovmmgn7t4e",
+    "createdAt": "2026-03-07T18:14:35.822Z",
+    "updatedAt": "2026-03-07T18:14:35.822Z",
+    "level": "info",
+    "action": "draw_executed",
+    "details": "执行抽签: 诗词抽签测试",
+    "metadata": {
+      "projectId": "tp2bi30uxahmmgn5u6o",
+      "result": {
+        "value": "登鹳雀楼 - 王之涣\n白日依山尽，黄河入海流。欲穷千里目，更上一层楼。",
+        "timestamp": "2026-03-07T18:14:35.821Z",
+        "metadata": {
+          "type": "list",
+          "total": 10
+        }
+      }
+    }
+  },
+  {
+    "id": "ft4h0ryymv7mmgn8xf0",
+    "createdAt": "2026-03-07T18:15:28.044Z",
+    "updatedAt": "2026-03-07T18:15:28.044Z",
+    "level": "info",
+    "action": "draw_executed",
+    "details": "执行抽签: 2333",
+    "metadata": {
+      "projectId": "lfap6624uhemmgn2qfd",
+      "result": {
+        "value": "咏鹅 - 骆宾王\n鹅鹅鹅，曲项向天歌。白毛浮绿水，红掌拨清波。",
+        "timestamp": "2026-03-07T18:15:28.043Z",
+        "metadata": {
+          "type": "list",
+          "total": 10
+        }
+      }
+    }
   }
 ]
