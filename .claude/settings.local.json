@@ -6,7 +6,10 @@
       "Bash(npm run build 2>&1)",
       "Bash(npm install autoprefixer 2>&1)",
       "Bash(git init 2>&1)",
-      "Bash(git add . 2>&1)"
+      "Bash(git add . 2>&1)",
+      "Bash(git commit -m \"fix: 修复前端 undefined length 错误和 API 返回格式\n\n问题：\n- API 返回 data.data 为 undefined 导致前端报错\n- mock 数据库未正确返回数组导致链式调用失败\n\n修复：\n- 改进 mock 数据库实现，确保链式调用正确返回数组\n- 添加前端安全检查，验证 data.data 是否为数组\n- 使用可选链操作符 \\(projects?.length\\) 防止 undefined 错误\n- 确保 fetchProjects 失败时设置空数组而不是 undefined\n\n修复错误：Cannot read properties of undefined \\(reading 'length'\\)\" 2>&1)",
+      "Bash(git add docs/PROGRESS.md && git commit -m \"docs: 更新进度文档 - 部署完成\n\n更新内容：\n- 标记部署完成状态\n- 记录所有已解决的问题（安全漏洞、前端错误）\n- 更新 Git 提交历史\n- 添加部署信息（Vercel 域名、仓库地址）\n- 记录项目统计数据\n- 添加下一步计划\" 2>&1)",
+      "Bash(git add -A && git commit -m \"feat: 重新设计页面布局，提升用户体验\n\n主页优化：\n- 添加精美的 Hero 区域和特性展示\n- 改进项目卡片设计，添加图标和标签\n- 优化色彩方案（橙色渐变主题）\n- 添加快速开始引导和空状态提示\n\n抽签页面优化：\n- 重新设计控制面板，添加统计信息\n- 优化三种风格切换按钮\n- 改进历史记录侧边栏，添加序号标识\n- 添加加载状态和重置功能\n\n创建项目表单优化：\n- 改为三步骤向导式创建流程\n- 添加大图标卡片选择类型\n- 实时显示内容统计\n- 添加步骤指示器\n\n整体改进：\n- 统一的橙色渐变主题\n- 更好的视觉层次和间距\n- 改进的阴影和圆角效果\n- 更好的移动端适配\" 2>&1)"
     ]
   }
 }
