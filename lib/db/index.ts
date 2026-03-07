@@ -2,6 +2,8 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import * as schema from "./schema";
 import { drawProjects, drawRecords, activityLogs } from "./schema";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
+import { join } from "path";
 
 /**
  * 数据库连接实例
@@ -11,11 +13,52 @@ import { drawProjects, drawRecords, activityLogs } from "./schema";
 // 生成唯一 ID
 const generateId = () => Math.random().toString(36).substring(2) + Date.now().toString(36);
 
+// 文件系统持久化存储路径
+const DATA_DIR = join(process.cwd(), '.mock-data');
+const PROJECTS_FILE = join(DATA_DIR, 'projects.json');
+const RECORDS_FILE = join(DATA_DIR, 'records.json');
+const LOGS_FILE = join(DATA_DIR, 'logs.json');
+
+// 确保数据目录存在
+if (!existsSync(DATA_DIR)) {
+  mkdirSync(DATA_DIR, { recursive: true });
+}
+
+// 从文件加载数据
+function loadFromFile(filename: string, defaultValue: any[] = []) {
+  if (existsSync(filename)) {
+    try {
+      const data = readFileSync(filename, 'utf-8');
+      const parsed = JSON.parse(data);
+      // 将日期字符串转换回Date对象
+      return parsed.map((item: any) => ({
+        ...item,
+        createdAt: item.createdAt ? new Date(item.createdAt) : undefined,
+        updatedAt: item.updatedAt ? new Date(item.updatedAt) : undefined,
+        drawnAt: item.drawnAt ? new Date(item.drawnAt) : undefined,
+      }));
+    } catch (error) {
+      console.error(`[Mock DB] 加载文件失败: ${filename}`, error);
+      return defaultValue;
+    }
+  }
+  return defaultValue;
+}
+
+// 保存数据到文件
+function saveToFile(filename: string, data: any[]) {
+  try {
+    writeFileSync(filename, JSON.stringify(data, null, 2), 'utf-8');
+  } catch (error) {
+    console.error(`[Mock DB] 保存文件失败: ${filename}`, error);
+  }
+}
+
 // 内存存储（用于 mock 模式）
-const memoryStore = {
-  projects: [] as any[],
-  records: [] as any[],
-  logs: [] as any[],
+let memoryStore = {
+  projects: loadFromFile(PROJECTS_FILE),
+  records: loadFromFile(RECORDS_FILE),
+  logs: loadFromFile(LOGS_FILE),
 };
 
 // 初始化预置数据
@@ -46,6 +89,9 @@ function initMockData() {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+
+    // 保存到文件
+    saveToFile(PROJECTS_FILE, memoryStore.projects);
   }
 }
 
@@ -86,15 +132,25 @@ const createMockDb = () => {
 
         // 应用 where 过滤
         if (state.whereClause) {
-          // Drizzle ORM的where可能返回SQL对象，需要提取条件
           const where = state.whereClause as any;
-          // 尝试从SQL对象中提取字段和值
-          if (where.left && where.right) {
-            // SQL表达式: { left: { columnNames: ['projectId'] }, right: 'xxx' }
-            const field = where.left?.columnNames?.[0];
-            const value = where.right;
-            if (field && value !== undefined) {
-              results = results.filter((p: any) => p[field] === value);
+          if (where.queryChunks) {
+            let fieldName: string | null = null;
+            let value: any = null;
+
+            if (where.Params && where.Params.length > 0) {
+              value = where.Params[0];
+            }
+
+            for (const chunk of where.queryChunks) {
+              if (chunk && typeof chunk === 'object') {
+                if (chunk.columnNames && chunk.columnNames.length > 0) {
+                  fieldName = chunk.columnNames[0];
+                }
+              }
+            }
+
+            if (fieldName && value !== undefined && value !== null) {
+              results = results.filter((p: any) => p[fieldName] === value);
             }
           } else if (where.id) {
             results = results.filter((p: any) => p.id === where.id);
@@ -120,13 +176,17 @@ const createMockDb = () => {
         // 根据 tableName 决定插入到哪个存储
         if (state.tableName === 'drawProjects') {
           memoryStore.projects.push(newItem);
+          saveToFile(PROJECTS_FILE, memoryStore.projects);
         } else if (state.tableName === 'drawRecords') {
           memoryStore.records.push(newItem);
+          saveToFile(RECORDS_FILE, memoryStore.records);
         } else if (state.tableName === 'activityLogs') {
           memoryStore.logs.push(newItem);
+          saveToFile(LOGS_FILE, memoryStore.logs);
         } else {
           // 默认插入到 projects
           memoryStore.projects.push(newItem);
+          saveToFile(PROJECTS_FILE, memoryStore.projects);
         }
         return [newItem]; // returning() 期望返回数组
       }
@@ -219,13 +279,17 @@ const createMockDb = () => {
         // 根据 tableName 决定插入到哪个存储
         if (state.tableName === 'drawProjects') {
           memoryStore.projects.push(newItem);
+          saveToFile(PROJECTS_FILE, memoryStore.projects);
         } else if (state.tableName === 'drawRecords') {
           memoryStore.records.push(newItem);
+          saveToFile(RECORDS_FILE, memoryStore.records);
         } else if (state.tableName === 'activityLogs') {
           memoryStore.logs.push(newItem);
+          saveToFile(LOGS_FILE, memoryStore.logs);
         } else {
           // 默认插入到 projects
           memoryStore.projects.push(newItem);
+          saveToFile(PROJECTS_FILE, memoryStore.projects);
         }
         return [newItem];
       }

@@ -1,0 +1,39 @@
+[
+  {
+    "id": "j9dez056pmmmgmzvc1",
+    "name": "数字抽签示例",
+    "description": "从1到100中随机抽取数字",
+    "type": "number",
+    "config": {
+      "min": 1,
+      "max": 100,
+      "allowRepeat": true,
+      "drawCount": 1
+    },
+    "uiStyle": "card",
+    "createdAt": "2026-03-07T18:08:25.441Z",
+    "updatedAt": "2026-03-07T18:08:25.441Z"
+  },
+  {
+    "id": "t3mcy8jns4qmmgmzvc1",
+    "name": "学生姓名抽签",
+    "description": "从班级学生名单中随机抽取",
+    "type": "name",
+    "config": {
+      "items": [
+        "张三",
+        "李四",
+        "王五",
+        "赵六",
+        "钱七",
+        "孙八",
+        "周九",
+        "吴十"
+      ],
+      "drawCount": 1
+    },
+    "uiStyle": "card",
+    "createdAt": "2026-03-07T18:08:25.441Z",
+    "updatedAt": "2026-03-07T18:08:25.441Z"
+  }
+]

@@ -117,7 +117,16 @@
       "Bash(curl -s -X POST http://localhost:3000/api/draw \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"projectId\":\"c5rjxdgf8qdmmgmhf6b\",\"count\":1}' && echo \"\" && \\\\\ncurl -s \"http://localhost:3000/api/draw?projectId=c5rjxdgf8qdmmgmhf6b&limit=3\" | python3 -m json.tool)",
       "Bash(git add -A && git commit -m \"fix: 修复mock数据库的链式调用和表识别问题\n\n- 修复insert/select/update/delete方法正确传递table参数\n- 修复Promise执行时序问题，延迟execute\\(\\)调用\n- 使用列名检查来识别表\\(drawProjects/drawRecords/activityLogs\\)\n- 正确处理Drizzle ORM的where SQL表达式\n- 添加预置数据以方便开发测试\n- 清理所有调试日志\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")",
       "Bash(git add -A && git commit -m \"fix: 将muted颜色改为明确的灰色以避免暖色调\n\n- DrawCard: from-muted to-muted/80 -> from-gray-100 to-gray-200/80\n- DrawCard: text-muted-foreground -> text-gray-500\n- DrawCard: border-muted-foreground/30 -> border-gray-400/30\n- DrawWheel: text-muted-foreground -> text-gray-500\n- DrawWheel: from-muted to-muted/50 -> from-gray-100 to-gray-200/50\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")",
-      "Bash(git add -A && git commit -m \"fix: 将所有secondary颜色改为纯黑色\n\n- DrawCard结果卡片: from-secondary -> from-black, to-secondary/80 -> to-gray-800\n- DrawWheel: from-primary/10 to-secondary/10 -> from-black/10 to-gray-800/10\n- DrawWheel: from-primary to-secondary -> from-black to-gray-800\n- globals.css: --secondary改为0 0 0（纯黑色）\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")"
+      "Bash(git add -A && git commit -m \"fix: 将所有secondary颜色改为纯黑色\n\n- DrawCard结果卡片: from-secondary -> from-black, to-secondary/80 -> to-gray-800\n- DrawWheel: from-primary/10 to-secondary/10 -> from-black/10 to-gray-800/10\n- DrawWheel: from-primary to-secondary -> from-black to-gray-800\n- globals.css: --secondary改为0 0 0（纯黑色）\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")",
+      "Bash(curl -s http://localhost:3000/api/projects | python3 -m json.tool | grep -A 20 \"学生姓名抽签\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/draw \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"projectId\":\"th2xmu3k65smmgmhf6b\",\"count\":1}' | python3 -m json.tool)",
+      "Bash(curl -s -X POST http://localhost:3000/api/draw \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"projectId\":\"th2xmu3k65smmgmhf6b\",\"count\":1}' && echo \"\")",
+      "Bash(curl -s http://localhost:3000/api/projects | python3 -c \"import sys, json; data = json.load\\(sys.stdin\\); print\\('数字抽签ID:', data['data'][0]['id']\\); print\\('姓名抽签ID:', data['data'][1]['id']\\)\")",
+      "Bash(curl -s http://localhost:3000/api/projects | python3 -c \"import sys, json; data = json.load\\(sys.stdin\\); [print\\(f\\\\\"{p['name']}: {p['id']}\\\\\"\\) for p in data['data']]\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/draw \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"projectId\":\"nbxyrc0dk7dmmgmx5gw\",\"count\":1}' | python3 -m json.tool)",
+      "Bash(curl -s http://localhost:3000/api/projects | python3 -m json.tool | grep -A5 \"学生姓名抽签\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/draw \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"projectId\":\"t3mcy8jns4qmmgmzvc1\",\"count\":1}' | python3 -m json.tool)",
+      "Bash(git add -A && git commit -m \"fix: 修复学生姓名抽签返回数字的问题\n\n问题：由于热重载导致项目ID变化，API无法找到正确的项目\n解决方案：\n1. 添加文件系统持久化，将数据保存到.mock-data/目录\n2. 在API中使用find手动过滤项目ID（临时解决方案）\n3. 清理所有调试日志\n\n现在学生姓名抽签可以正确返回姓名而不是数字\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")"
     ]
   }
 }

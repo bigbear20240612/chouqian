@@ -24,17 +24,17 @@ export async function POST(req: NextRequest) {
     // 获取项目配置
     const projects = await db
       .select()
-      .from(drawProjects)
-      .where(eq(drawProjects.id, projectId));
+      .from(drawProjects);
 
-    if (projects.length === 0) {
+    // 手动过滤项目ID（因为mock数据库的where子句可能有问题）
+    const project = projects.find((p: any) => p.id === projectId);
+
+    if (!project) {
       return NextResponse.json(
         { success: false, error: "项目不存在" },
         { status: 404 }
       );
     }
-
-    const project = projects[0];
 
     // 执行抽签
     const result = executeDraw(project.config as any, count);
