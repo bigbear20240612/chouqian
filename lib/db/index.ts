@@ -1,6 +1,7 @@
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import * as schema from "./schema";
+import { drawProjects, drawRecords, activityLogs } from "./schema";
 
 /**
  * 数据库连接实例
@@ -13,62 +14,222 @@ const generateId = () => Math.random().toString(36).substring(2) + Date.now().to
 // 内存存储（用于 mock 模式）
 const memoryStore = {
   projects: [] as any[],
+  records: [] as any[],
+  logs: [] as any[],
 };
+
+// 初始化预置数据
+function initMockData() {
+  if (memoryStore.projects.length === 0) {
+    // 创建一些预置项目
+    memoryStore.projects.push({
+      id: generateId(),
+      name: "数字抽签示例",
+      description: "从1到100中随机抽取数字",
+      type: "number",
+      config: { min: 1, max: 100, allowRepeat: true, drawCount: 1 },
+      uiStyle: "card",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    memoryStore.projects.push({
+      id: generateId(),
+      name: "学生姓名抽签",
+      description: "从班级学生名单中随机抽取",
+      type: "name",
+      config: {
+        items: ["张三", "李四", "王五", "赵六", "钱七", "孙八", "周九", "吴十"],
+        drawCount: 1
+      },
+      uiStyle: "card",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  }
+}
+
+// 初始化数据
+initMockData();
 
 // 创建 mock db 用于开发环境（无数据库时）
 const createMockDb = () => {
   // 创建链式调用对象
   const createChainable = (operation: string, initialValue: any = []) => {
-    const result: any = async () => {
-      // 执行实际的数据库操作
-      if (operation === 'select') {
-        return [...memoryStore.projects];
-      }
-      if (operation === 'insert') {
-        const newItem = {
-          id: generateId(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          ...initialValue,
-        };
-        memoryStore.projects.push(newItem);
-        return [newItem]; // returning() 期望返回数组
-      }
-      if (operation === 'update') {
-        return memoryStore.projects.map((item: any) => ({ ...item, ...initialValue }));
-      }
-      if (operation === 'delete') {
-        return memoryStore.projects.filter((_: any, idx: number) => idx !== 0);
-      }
-      return initialValue;
+    // 状态保存
+    let state = {
+      operation,
+      initialValue,
+      table: null as any,
+      tableName: 'unknown' as string,
+      whereClause: null as any,
+      limitValue: null as number | null,
+      offsetValue: null as number | null,
     };
 
-    // 链式调用方法
-    result.from = () => createChainable(operation, initialValue);
-    result.where = () => createChainable(operation, initialValue);
-    result.orderBy = () => createChainable(operation, initialValue);
-    result.limit = () => createChainable(operation, initialValue);
-    result.offset = () => createChainable(operation, initialValue);
-    result.values = () => createChainable(operation, initialValue);
-    result.set = (data: any) => createChainable(operation, data);
+    const execute = async () => {
+      // 执行实际的数据库操作
+      if (state.operation === 'select') {
+        // 根据表名选择数据源
+        let dataSource: any[] = [];
+        if (state.tableName === 'drawProjects') {
+          dataSource = memoryStore.projects;
+        } else if (state.tableName === 'drawRecords') {
+          dataSource = memoryStore.records;
+        } else if (state.tableName === 'activityLogs') {
+          dataSource = memoryStore.logs;
+        } else {
+          // 默认从 projects 查询
+          dataSource = memoryStore.projects;
+        }
+        let results = [...dataSource];
 
-    // returning 方法 - 特别处理
-    result.returning = () => {
-      // 如果是 insert 操作，返回模拟的插入结果（带 ID）
-      if (operation === 'insert' && initialValue) {
+        // 应用 where 过滤
+        if (state.whereClause) {
+          // Drizzle ORM的where可能返回SQL对象，需要提取条件
+          const where = state.whereClause as any;
+          // 尝试从SQL对象中提取字段和值
+          if (where.left && where.right) {
+            // SQL表达式: { left: { columnNames: ['projectId'] }, right: 'xxx' }
+            const field = where.left?.columnNames?.[0];
+            const value = where.right;
+            if (field && value !== undefined) {
+              results = results.filter((p: any) => p[field] === value);
+            }
+          } else if (where.id) {
+            results = results.filter((p: any) => p.id === where.id);
+          } else if (where.projectId) {
+            results = results.filter((p: any) => p.projectId === where.projectId);
+          }
+        }
+
+        // 应用 limit
+        if (state.limitValue !== null) {
+          results = results.slice(0, state.limitValue);
+        }
+
+        return results;
+      }
+      if (state.operation === 'insert') {
         const newItem = {
           id: generateId(),
           createdAt: new Date(),
           updatedAt: new Date(),
-          ...initialValue,
+          ...state.initialValue,
         };
-        memoryStore.projects.push(newItem);
-        // 返回一个特殊的 Promise，模拟真实的 returning 行为
-        const returnResult: any = async () => [newItem];
-        returnResult.then = (onFulfilled: any) => Promise.resolve([newItem]).then(onFulfilled);
-        return returnResult;
+        // 根据 tableName 决定插入到哪个存储
+        if (state.tableName === 'drawProjects') {
+          memoryStore.projects.push(newItem);
+        } else if (state.tableName === 'drawRecords') {
+          memoryStore.records.push(newItem);
+        } else if (state.tableName === 'activityLogs') {
+          memoryStore.logs.push(newItem);
+        } else {
+          // 默认插入到 projects
+          memoryStore.projects.push(newItem);
+        }
+        return [newItem]; // returning() 期望返回数组
       }
-      return createChainable(operation, initialValue);
+      if (state.operation === 'update') {
+        return memoryStore.projects.map((item: any) => ({ ...item, ...state.initialValue }));
+      }
+      if (state.operation === 'delete') {
+        return memoryStore.projects.filter((_: any, idx: number) => idx !== 0);
+      }
+      return state.initialValue;
+    };
+
+    const result: any = async () => {
+      return await execute();
+    };
+
+    // 延迟创建Promise，只在需要时创建
+    let _queryPromise: Promise<any> | null = null;
+    const getQueryPromise = () => {
+      if (!_queryPromise) {
+        _queryPromise = execute();
+      }
+      return _queryPromise;
+    };
+
+    // 添加Promise支持，使await可以正常工作
+    result.then = (onFulfilled: any, onRejected: any) => getQueryPromise().then(onFulfilled, onRejected);
+    result.catch = (onRejected: any) => getQueryPromise().catch(onRejected);
+    result.finally = (onFinally: any) => getQueryPromise().finally(onFinally);
+
+    // 链式调用方法 - 保存状态
+    result.from = (table: any) => {
+      state.table = table;
+
+      // 通过检查特定列来识别表
+      const keys = Object.keys(table || {});
+      if (keys.includes('name') && keys.includes('type') && keys.includes('config')) {
+        state.tableName = 'drawProjects';
+      } else if (keys.includes('projectId') && keys.includes('result')) {
+        state.tableName = 'drawRecords';
+      } else if (keys.includes('level') && keys.includes('action')) {
+        state.tableName = 'activityLogs';
+      } else {
+        state.tableName = 'unknown';
+      }
+
+      return result;
+    };
+
+    result.where = (clause: any) => {
+      state.whereClause = clause;
+      return result;
+    };
+
+    result.orderBy = () => {
+      // 忽略排序，mock 模式不需要排序
+      return result;
+    };
+
+    result.limit = (value: number) => {
+      state.limitValue = value;
+      return result;
+    };
+
+    result.offset = (value: number) => {
+      state.offsetValue = value;
+      return result;
+    };
+
+    result.values = (data: any) => {
+      state.initialValue = data;
+      return result;
+    };
+
+    result.set = (data: any) => {
+      state.initialValue = { ...state.initialValue, ...data };
+      return result;
+    };
+
+    // returning 方法 - 特别处理
+    result.returning = async () => {
+      // 如果是 insert 操作，返回模拟的插入结果（带 ID）
+      if (state.operation === 'insert' && state.initialValue) {
+        const newItem = {
+          id: generateId(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          ...state.initialValue,
+        };
+        // 根据 tableName 决定插入到哪个存储
+        if (state.tableName === 'drawProjects') {
+          memoryStore.projects.push(newItem);
+        } else if (state.tableName === 'drawRecords') {
+          memoryStore.records.push(newItem);
+        } else if (state.tableName === 'activityLogs') {
+          memoryStore.logs.push(newItem);
+        } else {
+          // 默认插入到 projects
+          memoryStore.projects.push(newItem);
+        }
+        return [newItem];
+      }
+      return await execute();
     };
 
     // 执行方法
@@ -79,9 +240,21 @@ const createMockDb = () => {
 
   return {
     select: () => createChainable('select'),
-    insert: () => createChainable('insert'),
-    update: () => createChainable('update'),
-    delete: () => createChainable('delete'),
+    insert: (table: any) => {
+      const chainable = createChainable('insert');
+      chainable.from(table);
+      return chainable;
+    },
+    update: (table: any) => {
+      const chainable = createChainable('update');
+      chainable.from(table);
+      return chainable;
+    },
+    delete: (table: any) => {
+      const chainable = createChainable('delete');
+      chainable.from(table);
+      return chainable;
+    },
   } as any;
 };
 
@@ -90,8 +263,11 @@ let dbInstance: any = null;
 export function getDb() {
   if (!process.env.DATABASE_URL) {
     // 开发环境无数据库时返回 mock
-    console.warn("⚠️ DATABASE_URL not set. Using mock database (no data persistence).");
-    return createMockDb();
+    if (!dbInstance) {
+      console.warn("⚠️ DATABASE_URL not set. Using mock database (no data persistence).");
+      dbInstance = createMockDb();
+    }
+    return dbInstance;
   }
   if (!dbInstance) {
     const sql = neon(process.env.DATABASE_URL);
