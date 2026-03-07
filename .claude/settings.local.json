@@ -135,7 +135,12 @@
       "Bash(curl -s -X POST http://localhost:3000/api/draw \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"projectId\":\"tp2bi30uxahmmgn5u6o\",\"count\":1}' >/dev/null && sleep 1 && tail -30 /tmp/next-dev.log)",
       "Bash(git add -A && git commit -m \"fix: 修复诗词抽签和列表抽签的配置问题\n\n问题：\n1. poem类型项目创建时items为空数组，导致抽签失败\n2. name/custom类型使用错误的split分隔符\\('\\\\\\\\n'而非'\\\\\\\\n'\\)\n\n修复：\n1. 创建poem类型时添加isPoem标记\n2. executeDraw识别isPoem标记并使用预置诗词库\n3. 修复列表抽签的换行符分隔符\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")",
       "Bash(curl -s http://localhost:3000/api/projects | python3 -c \"import sys, json; data = json.load\\(sys.stdin\\); p = [x for x in data['data'] if x['id'] == 'lfap6624uhemmgn2qfd']; print\\(json.dumps\\(p[0], indent=2, ensure_ascii=False\\) if p else 'Not found'\\)\")",
-      "Bash(git add -A && git commit -m \"fix: 支持旧版poem类型项目（无isPoem标记）\n\n问题：修复前创建的poem项目没有isPoem标记，导致抽签失败\n解决：executeDraw函数接收projectType参数，当type为'poem'时使用预置诗词库\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")"
+      "Bash(git add -A && git commit -m \"fix: 支持旧版poem类型项目（无isPoem标记）\n\n问题：修复前创建的poem项目没有isPoem标记，导致抽签失败\n解决：executeDraw函数接收projectType参数，当type为'poem'时使用预置诗词库\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")",
+      "Bash(curl -s http://localhost:3000/api/projects | python3 -c \"import sys, json; data = json.load\\(sys.stdin\\); projects = [f\\\\\"{p['name']}: {p['id']}\\\\\" for p in data['data']]; print\\('\\\\n'.join\\(projects\\)\\); print\\(f'\\\\n查找的项目ID: cdpaz4n2xremmgnar48'\\); found = any\\(p['id'] == 'cdpaz4n2xremmgnar48' for p in data['data']\\); print\\(f'项目存在: {found}'\\)\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/draw \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"projectId\":\"cdpaz4n2xremmgnar48\",\"count\":1}')",
+      "Bash(curl -s http://localhost:3000/api/projects | python3 -c \"import sys, json; data = json.load\\(sys.stdin\\); p = [x for x in data['data'] if x['id'] == 'cdpaz4n2xremmgnar48']; print\\(json.dumps\\(p[0], indent=2\\) if p else 'Not found'\\)\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/draw \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"projectId\":\"cdpaz4n2xremmgnar48\",\"count\":1}' | python3 -m json.tool)",
+      "Bash(git add -A && git commit -m \"fix: 支持旧项目的items中包含\\\\\\\\n字面量\n\n问题：之前创建的项目items数组中包含\\\\\\\\n字面量而非真正的换行符\n解决：在executeDraw中检测并处理这种情况，将\\\\\\\\n拆分为多个选项\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")"
     ]
   }
 }

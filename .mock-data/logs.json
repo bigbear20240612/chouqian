@@ -22,107 +22,31 @@
     }
   },
   {
-    "id": "9tg6zc8tczcmmgn6juz",
-    "createdAt": "2026-03-07T18:13:37.163Z",
-    "updatedAt": "2026-03-07T18:13:37.163Z",
+    "id": "23nfe2gociqmmgnar49",
+    "createdAt": "2026-03-07T18:16:53.193Z",
+    "updatedAt": "2026-03-07T18:16:53.193Z",
     "level": "info",
-    "action": "draw_executed",
-    "details": "执行抽签: 诗词抽签测试",
+    "action": "project_created",
+    "details": "创建项目: gghgg",
     "metadata": {
-      "projectId": "tp2bi30uxahmmgn5u6o",
-      "result": {
-        "value": "静夜思 - 李白\n床前明月光，疑是地上霜。举头望明月，低头思故乡。",
-        "timestamp": "2026-03-07T18:13:37.162Z",
-        "metadata": {
-          "type": "list",
-          "total": 10
-        }
-      }
+      "projectId": "cdpaz4n2xremmgnar48"
     }
   },
   {
-    "id": "0546a3i0z57jmmgn6ods",
-    "createdAt": "2026-03-07T18:13:43.024Z",
-    "updatedAt": "2026-03-07T18:13:43.024Z",
+    "id": "gfody0t9cktmmgncvcu",
+    "createdAt": "2026-03-07T18:18:31.998Z",
+    "updatedAt": "2026-03-07T18:18:31.998Z",
     "level": "info",
     "action": "draw_executed",
-    "details": "执行抽签: 诗词抽签测试",
+    "details": "执行抽签: gghgg",
     "metadata": {
-      "projectId": "tp2bi30uxahmmgn5u6o",
+      "projectId": "cdpaz4n2xremmgnar48",
       "result": {
-        "value": "相思 - 王维\n红豆生南国，春来发几枝。愿君多采撷，此物最相思。",
-        "timestamp": "2026-03-07T18:13:43.023Z",
+        "value": "ioniun",
+        "timestamp": "2026-03-07T18:18:31.997Z",
         "metadata": {
           "type": "list",
-          "total": 10
-        }
-      }
-    }
-  },
-  {
-    "id": "5c7ex9ilokummgn6ugh",
-    "createdAt": "2026-03-07T18:13:50.897Z",
-    "updatedAt": "2026-03-07T18:13:50.897Z",
-    "level": "info",
-    "action": "draw_executed",
-    "details": "执行抽签: 诗词抽签测试",
-    "metadata": {
-      "projectId": "tp2bi30uxahmmgn5u6o",
-      "result": {
-        "value": "回乡偶书 - 贺知章\n少小离家老大回，乡音无改鬓毛衰。儿童相见不相识，笑问客从何处来。",
-        "timestamp": "2026-03-07T18:13:50.897Z",
-        "metadata": {
-          "type": "list",
-          "total": 10
-        }
-      }
-    }
-  },
-  {
-    "id": "wljzw05jzqmmgn7ia6",
-    "createdAt": "2026-03-07T18:14:21.774Z",
-    "updatedAt": "2026-03-07T18:14:21.774Z",
-    "level": "error",
-    "action": "draw_failed",
-    "details": "抽签失败",
-    "metadata": {
-      "error": {}
-    }
-  },
-  {
-    "id": "2bwj4rznxovmmgn7t4e",
-    "createdAt": "2026-03-07T18:14:35.822Z",
-    "updatedAt": "2026-03-07T18:14:35.822Z",
-    "level": "info",
-    "action": "draw_executed",
-    "details": "执行抽签: 诗词抽签测试",
-    "metadata": {
-      "projectId": "tp2bi30uxahmmgn5u6o",
-      "result": {
-        "value": "登鹳雀楼 - 王之涣\n白日依山尽，黄河入海流。欲穷千里目，更上一层楼。",
-        "timestamp": "2026-03-07T18:14:35.821Z",
-        "metadata": {
-          "type": "list",
-          "total": 10
-        }
-      }
-    }
-  },
-  {
-    "id": "ft4h0ryymv7mmgn8xf0",
-    "createdAt": "2026-03-07T18:15:28.044Z",
-    "updatedAt": "2026-03-07T18:15:28.044Z",
-    "level": "info",
-    "action": "draw_executed",
-    "details": "执行抽签: 2333",
-    "metadata": {
-      "projectId": "lfap6624uhemmgn2qfd",
-      "result": {
-        "value": "咏鹅 - 骆宾王\n鹅鹅鹅，曲项向天歌。白毛浮绿水，红掌拨清波。",
-        "timestamp": "2026-03-07T18:15:28.043Z",
-        "metadata": {
-          "type": "list",
-          "total": 10
+          "total": 4
         }
       }
     }

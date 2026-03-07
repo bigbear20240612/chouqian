@@ -142,8 +142,14 @@ export function executeDraw(config: DrawConfig, count = 1, projectType?: string)
     };
     return drawFromList(poemConfig, count);
   } else if (config.items && config.items.length > 0) {
-    // 列表抽签
-    return drawFromList(config, count);
+    // 列表抽签 - 处理旧项目中的\\n字面量
+    let items = config.items;
+    // 检查是否包含\\n字面量（旧项目的bug）
+    if (items.length === 1 && items[0].includes('\\n')) {
+      // 将\\n拆分为多个选项
+      items = items[0].split('\\n').filter((i) => i.trim());
+    }
+    return drawFromList({ ...config, items }, count);
   } else {
     throw new Error("无效的抽签配置");
   }
