@@ -157,7 +157,7 @@ export default function HomePage() {
 
           <Card className="border-2 hover:shadow-lg transition-shadow">
             <CardHeader>
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-4">
                 <Palette className="h-6 w-6 text-white" />
               </div>
               <CardTitle>精美动画</CardTitle>
