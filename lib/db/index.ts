@@ -54,16 +54,24 @@ function saveToFile(filename: string, data: any[]) {
   }
 }
 
-// 内存存储（用于 mock 模式）
-let memoryStore = {
-  projects: loadFromFile(PROJECTS_FILE),
-  records: loadFromFile(RECORDS_FILE),
-  logs: loadFromFile(LOGS_FILE),
-};
+// 获取共享的内存存储（单例模式）
+export function getMemoryStore() {
+  if (!global.__mockMemoryStore) {
+    global.__mockMemoryStore = {
+      projects: loadFromFile(PROJECTS_FILE),
+      records: loadFromFile(RECORDS_FILE),
+      logs: loadFromFile(LOGS_FILE),
+    };
+    console.log("[Mock DB] 初始化全局memoryStore，项目数:", global.__mockMemoryStore.projects.length);
+  }
+  return global.__mockMemoryStore;
+}
 
 // 初始化预置数据
 function initMockData() {
+  const memoryStore = getMemoryStore();
   if (memoryStore.projects.length === 0) {
+    console.log("[Mock DB] 初始化预置数据...");
     // 创建一些预置项目
     memoryStore.projects.push({
       id: generateId(),
@@ -92,6 +100,7 @@ function initMockData() {
 
     // 保存到文件
     saveToFile(PROJECTS_FILE, memoryStore.projects);
+    console.log("[Mock DB] 预置数据已保存");
   }
 }
 
@@ -114,19 +123,22 @@ const createMockDb = () => {
     };
 
     const execute = async () => {
+      // 获取共享的内存存储
+      const store = getMemoryStore();
+
       // 执行实际的数据库操作
       if (state.operation === 'select') {
         // 根据表名选择数据源
         let dataSource: any[] = [];
         if (state.tableName === 'drawProjects') {
-          dataSource = memoryStore.projects;
+          dataSource = store.projects;
         } else if (state.tableName === 'drawRecords') {
-          dataSource = memoryStore.records;
+          dataSource = store.records;
         } else if (state.tableName === 'activityLogs') {
-          dataSource = memoryStore.logs;
+          dataSource = store.logs;
         } else {
           // 默认从 projects 查询
-          dataSource = memoryStore.projects;
+          dataSource = store.projects;
         }
         let results = [...dataSource];
 
@@ -172,10 +184,10 @@ const createMockDb = () => {
         return [];
       }
       if (state.operation === 'update') {
-        return memoryStore.projects.map((item: any) => ({ ...item, ...state.initialValue }));
+        return store.projects.map((item: any) => ({ ...item, ...state.initialValue }));
       }
       if (state.operation === 'delete') {
-        return memoryStore.projects.filter((_: any, idx: number) => idx !== 0);
+        return store.projects.filter((_: any, idx: number) => idx !== 0);
       }
       return state.initialValue;
     };
@@ -249,6 +261,9 @@ const createMockDb = () => {
 
     // returning 方法 - 特别处理
     result.returning = async () => {
+      // 获取共享的内存存储
+      const store = getMemoryStore();
+
       // 如果是 insert 操作，返回模拟的插入结果（带 ID）
       if (state.operation === 'insert' && state.initialValue) {
         const newItem = {
@@ -259,18 +274,18 @@ const createMockDb = () => {
         };
         // 根据 tableName 决定插入到哪个存储
         if (state.tableName === 'drawProjects') {
-          memoryStore.projects.push(newItem);
-          saveToFile(PROJECTS_FILE, memoryStore.projects);
+          store.projects.push(newItem);
+          saveToFile(PROJECTS_FILE, store.projects);
         } else if (state.tableName === 'drawRecords') {
-          memoryStore.records.push(newItem);
-          saveToFile(RECORDS_FILE, memoryStore.records);
+          store.records.push(newItem);
+          saveToFile(RECORDS_FILE, store.records);
         } else if (state.tableName === 'activityLogs') {
-          memoryStore.logs.push(newItem);
-          saveToFile(LOGS_FILE, memoryStore.logs);
+          store.logs.push(newItem);
+          saveToFile(LOGS_FILE, store.logs);
         } else {
           // 默认插入到 projects
-          memoryStore.projects.push(newItem);
-          saveToFile(PROJECTS_FILE, memoryStore.projects);
+          store.projects.push(newItem);
+          saveToFile(PROJECTS_FILE, store.projects);
         }
         return [newItem];
       }

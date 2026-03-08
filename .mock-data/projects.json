@@ -132,5 +132,59 @@
       "max": 10
     },
     "uiStyle": "card"
+  },
+  {
+    "id": "9q7qqj51ehmmh299yn",
+    "createdAt": "2026-03-08T01:15:38.542Z",
+    "updatedAt": "2026-03-08T01:15:38.542Z",
+    "name": "hkjkn",
+    "description": "bkjh",
+    "type": "custom",
+    "config": {
+      "items": [
+        "guy\\n879789\\n345\\n09hjkh\\n"
+      ],
+      "drawCount": 1
+    },
+    "uiStyle": "card"
+  },
+  {
+    "id": "dkfre4fbia9mmh2cc8c",
+    "createdAt": "2026-03-08T01:18:01.452Z",
+    "updatedAt": "2026-03-08T01:18:01.452Z",
+    "name": "完整测试",
+    "description": "测试完整流程",
+    "type": "number",
+    "config": {
+      "min": 1,
+      "max": 5
+    },
+    "uiStyle": "card"
+  },
+  {
+    "id": "e0jthonnv6lmmh2d466",
+    "createdAt": "2026-03-08T01:18:37.661Z",
+    "updatedAt": "2026-03-08T01:18:37.661Z",
+    "name": "测试同步",
+    "description": "测试",
+    "type": "number",
+    "config": {
+      "min": 1,
+      "max": 5
+    },
+    "uiStyle": "card"
+  },
+  {
+    "id": "ndq33od67lgmmh2e2f8",
+    "createdAt": "2026-03-08T01:19:22.052Z",
+    "updatedAt": "2026-03-08T01:19:22.052Z",
+    "name": "单例测试",
+    "description": "测试单例模式",
+    "type": "number",
+    "config": {
+      "min": 1,
+      "max": 5
+    },
+    "uiStyle": "card"
   }
 ]
