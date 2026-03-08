@@ -35,3 +35,7 @@ next-env.d.ts
 
 # drizzle
 /drizzle
+
+# mock data (development only)
+/.mock-data
+/.claude/projects

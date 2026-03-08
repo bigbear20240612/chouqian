@@ -134,7 +134,7 @@ export function executeDraw(config: DrawConfig, count = 1, projectType?: string)
   if (config.min !== undefined && config.max !== undefined) {
     // 数字抽签
     return drawNumber(config, count);
-  } else if (config.isPoem || projectType === "poem") {
+  } else if (projectType === "poem") {
     // 诗词抽签 - 使用预置诗词库
     const poemConfig = {
       ...config,
