@@ -99,7 +99,7 @@ export default function HomePage() {
             <div className="w-10 h-10 rounded-lg bg-black flex items-center justify-center">
               <Sparkles className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-xl font-bold text-black">抽签系统</h1>
+            <h1 className="text-xl font-bold text-black">庞老师的抽签系统</h1>
           </div>
           <Button variant="ghost" size="sm" asChild className="text-black">
             <Link href="/projects/new">
@@ -235,7 +235,7 @@ export default function HomePage() {
       <footer className="border-t border-gray-200 mt-20 py-8 bg-white">
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between text-sm text-gray-600">
-            <span>抽签系统</span>
+            <span>庞老师的抽签系统</span>
             <span>© 2026</span>
           </div>
         </div>
