@@ -76,5 +76,61 @@
       "drawCount": 1
     },
     "uiStyle": "card"
+  },
+  {
+    "id": "hgons44y4wimmgnfhfq",
+    "createdAt": "2026-03-07T18:20:33.926Z",
+    "updatedAt": "2026-03-07T18:20:33.926Z",
+    "name": "hhhhh",
+    "description": "nnnk",
+    "type": "custom",
+    "config": {
+      "items": [
+        "vgvhvh\\n bibiihii\\n bbubb\\n"
+      ],
+      "drawCount": 1
+    },
+    "uiStyle": "card"
+  },
+  {
+    "id": "9er179gwiqvmmgnjw2f",
+    "createdAt": "2026-03-07T18:23:59.511Z",
+    "updatedAt": "2026-03-07T18:23:59.511Z",
+    "name": "sdf",
+    "description": "fwefwdvss",
+    "type": "custom",
+    "config": {
+      "items": [
+        "sdfsf\\nffwfw\\nfwfw\\nfwfwf\\n"
+      ],
+      "drawCount": 1
+    },
+    "uiStyle": "card"
+  },
+  {
+    "id": "vfhqm4ms3tammgnqb2y",
+    "createdAt": "2026-03-07T18:28:58.905Z",
+    "updatedAt": "2026-03-07T18:28:58.905Z",
+    "name": "测试项目",
+    "description": "测试",
+    "type": "number",
+    "config": {
+      "min": 1,
+      "max": 10
+    },
+    "uiStyle": "card"
+  },
+  {
+    "id": "kquxeo4nmammh27ah4",
+    "createdAt": "2026-03-08T01:14:05.895Z",
+    "updatedAt": "2026-03-08T01:14:05.895Z",
+    "name": "测试项目2",
+    "description": "测试",
+    "type": "number",
+    "config": {
+      "min": 1,
+      "max": 10
+    },
+    "uiStyle": "card"
   }
 ]

@@ -167,28 +167,9 @@ const createMockDb = () => {
         return results;
       }
       if (state.operation === 'insert') {
-        const newItem = {
-          id: generateId(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          ...state.initialValue,
-        };
-        // 根据 tableName 决定插入到哪个存储
-        if (state.tableName === 'drawProjects') {
-          memoryStore.projects.push(newItem);
-          saveToFile(PROJECTS_FILE, memoryStore.projects);
-        } else if (state.tableName === 'drawRecords') {
-          memoryStore.records.push(newItem);
-          saveToFile(RECORDS_FILE, memoryStore.records);
-        } else if (state.tableName === 'activityLogs') {
-          memoryStore.logs.push(newItem);
-          saveToFile(LOGS_FILE, memoryStore.logs);
-        } else {
-          // 默认插入到 projects
-          memoryStore.projects.push(newItem);
-          saveToFile(PROJECTS_FILE, memoryStore.projects);
-        }
-        return [newItem]; // returning() 期望返回数组
+        // insert操作不应该在这里创建数据
+        // 只在returning()时创建并保存，避免重复
+        return [];
       }
       if (state.operation === 'update') {
         return memoryStore.projects.map((item: any) => ({ ...item, ...state.initialValue }));
