@@ -258,23 +258,23 @@ export default function EditProjectPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleExport}
-                className="border-gray-300 text-black"
+                className="border-gray-300 text-black text-xs sm:text-sm px-2 sm:px-3 hidden sm:flex"
               >
-                <Download className="h-4 w-4 mr-2" />
+                <Download className="h-3 w-3 sm:h-4 sm:w-4" />
                 导出
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleImport}
-                className="border-gray-300 text-black"
+                className="border-gray-300 text-black text-xs sm:text-sm px-2 sm:px-3 hidden sm:flex"
               >
-                <Upload className="h-4 w-4 mr-2" />
+                <Upload className="h-3 w-3 sm:h-4 sm:w-4" />
                 导入
               </Button>
               <Button
@@ -282,18 +282,18 @@ export default function EditProjectPage() {
                 size="sm"
                 onClick={handleDelete}
                 disabled={saving}
-                className="border-red-300 text-red-600 hover:bg-red-50 hover:border-red-400"
+                className="border-red-300 text-red-600 hover:bg-red-50 hover:border-red-400 text-xs sm:text-sm px-2 sm:px-3"
               >
-                <Trash2 className="h-4 w-4 mr-2" />
-                删除项目
+                <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">删除</span>
               </Button>
               <Button
                 size="sm"
                 onClick={handleSave}
                 disabled={saving}
-                className="bg-black text-white hover:bg-gray-800"
+                className="bg-black text-white hover:bg-gray-800 text-xs sm:text-sm px-3 sm:px-4"
               >
-                <Save className="h-4 w-4 mr-2" />
+                <Save className="h-3 w-3 sm:h-4 sm:w-4" />
                 {saving ? "保存中..." : "保存"}
               </Button>
             </div>
@@ -302,11 +302,11 @@ export default function EditProjectPage() {
       </header>
 
       {/* 主内容 */}
-      <main className="container mx-auto px-6 py-8 max-w-4xl">
+      <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl">
         {/* 消息提示 */}
         {message && (
           <div
-            className={`mb-6 p-4 rounded-lg border ${
+            className={`mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg border text-sm sm:text-base ${
               message.type === "success"
                 ? "bg-green-50 border-green-200 text-green-800"
                 : "bg-red-50 border-red-200 text-red-800"

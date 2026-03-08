@@ -145,36 +145,36 @@ export default function DrawPage() {
     <div className="min-h-screen bg-white">
       {/* 极简导航 */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={() => router.push("/")} className="text-black">
+        <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center justify-between w-full gap-2">
+            <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+              <Button variant="ghost" size="icon" onClick={() => router.push("/")} className="text-black flex-shrink-0">
                 <ArrowLeft className="h-5 w-5" />
               </Button>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-black flex items-center justify-center">
-                  <Sparkles className="h-6 w-6 text-white" />
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-black flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="h-4 sm:h-6 w-4 sm:w-6 text-white" />
                 </div>
-                <div>
-                  <h1 className="text-xl font-bold text-black">{currentProject.name}</h1>
+                <div className="min-w-0">
+                  <h1 className="text-base sm:text-lg md:text-xl font-bold text-black truncate">{currentProject.name}</h1>
                   {currentProject.description && (
-                    <p className="text-sm text-gray-600 line-clamp-1">{currentProject.description}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-1 hidden sm:block">{currentProject.description}</p>
                   )}
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => router.push(`/history/${projectId}`)}
-                className="border-gray-300 text-black"
+                className="border-gray-300 text-black text-xs sm:text-sm px-2 sm:px-3"
               >
-                <HistoryIcon className="h-4 w-4 mr-2" />
-                历史记录
+                <HistoryIcon className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">历史记录</span>
                 {historyCount > 0 && (
-                  <span className="ml-2 px-2 py-0.5 bg-black text-white text-xs rounded-full">
+                  <span className="ml-1 sm:ml-2 px-1.5 sm:px-2 py-0.5 bg-black text-white text-xs rounded-full">
                     {historyCount}
                   </span>
                 )}
@@ -183,10 +183,10 @@ export default function DrawPage() {
                 variant="outline"
                 size="sm"
                 onClick={() => router.push(`/edit/${projectId}`)}
-                className="border-gray-300 text-black"
+                className="border-gray-300 text-black text-xs sm:text-sm px-2 sm:px-3"
               >
-                <Settings className="h-4 w-4 mr-2" />
-                编辑
+                <Settings className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">编辑</span>
               </Button>
             </div>
           </div>
@@ -194,18 +194,18 @@ export default function DrawPage() {
       </header>
 
       {/* 主内容 */}
-      <main className="container mx-auto px-6 py-8">
+      <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* 抽签区域 */}
         <div className="max-w-3xl mx-auto">
             <Card className="border border-gray-300 bg-white">
-              <CardContent className="pt-8">
+              <CardContent className="pt-6 sm:pt-8 pb-6">
                 {/* 风格切换 */}
-                <div className="flex justify-center gap-2 mb-8">
+                <div className="flex justify-center gap-2 mb-6 sm:mb-8">
                   <Button
                     variant={selectedUIStyle === "card" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedUIStyle("card")}
-                    className={`flex-1 max-w-[100px] rounded-none ${
+                    className={`flex-1 max-w-[80px] sm:max-w-[100px] text-xs sm:text-sm rounded-none ${
                       selectedUIStyle === "card" ? "bg-black text-white" : "border-gray-300 text-black"
                     }`}
                   >
@@ -215,7 +215,7 @@ export default function DrawPage() {
                     variant={selectedUIStyle === "stick" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedUIStyle("stick")}
-                    className={`flex-1 max-w-[100px] rounded-none ${
+                    className={`flex-1 max-w-[80px] sm:max-w-[100px] text-xs sm:text-sm rounded-none ${
                       selectedUIStyle === "stick" ? "bg-black text-white" : "border-gray-300 text-black"
                     }`}
                   >
@@ -225,7 +225,7 @@ export default function DrawPage() {
                     variant={selectedUIStyle === "wheel" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedUIStyle("wheel")}
-                    className={`flex-1 max-w-[100px] rounded-none ${
+                    className={`flex-1 max-w-[80px] sm:max-w-[100px] text-xs sm:text-sm rounded-none ${
                       selectedUIStyle === "wheel" ? "bg-black text-white" : "border-gray-300 text-black"
                     }`}
                   >
@@ -234,31 +234,31 @@ export default function DrawPage() {
                 </div>
 
                 {/* 抽签组件 */}
-                <div className="min-h-[400px] flex items-center justify-center mb-8">
+                <div className="min-h-[300px] sm:min-h-[400px] flex items-center justify-center mb-6 sm:mb-8">
                   {renderDrawComponent()}
                 </div>
 
                 {/* 操作按钮 */}
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
                   <Button
                     size="lg"
                     onClick={handleDraw}
                     disabled={isDrawing}
-                    className="flex-1 max-w-[300px] bg-black text-white hover:bg-gray-800 text-base h-14 rounded-none"
+                    className="flex-1 max-w-full sm:max-w-[300px] bg-black text-white hover:bg-gray-800 text-sm sm:text-base h-12 sm:h-14 rounded-none"
                   >
                     {isDrawing ? (
                       <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                        <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-white mr-2"></div>
                         抽签中...
                       </>
                     ) : result ? (
                       <>
-                        <RotateCcw className="h-5 w-5 mr-2" />
+                        <RotateCcw className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                         再次抽签
                       </>
                     ) : (
                       <>
-                        <Sparkles className="h-5 w-5 mr-2" />
+                        <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                         开始抽签
                       </>
                     )}
@@ -269,7 +269,7 @@ export default function DrawPage() {
                       variant="outline"
                       onClick={handleReset}
                       disabled={isDrawing}
-                      className="h-14 rounded-none border-gray-300 text-black"
+                      className="h-12 sm:h-14 rounded-none border-gray-300 text-black text-sm sm:text-base"
                     >
                       <RotateCcw className="h-4 w-4 mr-2" />
                       重置

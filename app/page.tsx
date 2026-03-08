@@ -111,17 +111,17 @@ export default function HomePage() {
       </header>
 
       {/* 极简 Hero */}
-      <section className="container mx-auto px-6 py-20 text-center">
-        <h2 className="text-6xl font-bold text-black mb-6">
+      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-black mb-4 sm:mb-6">
           课堂抽签工具
         </h2>
-        <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
           简单易用，快速抽签
         </p>
         <Button
           size="lg"
           asChild
-          className="bg-black text-white hover:bg-gray-800 text-lg h-14 px-8 rounded-none"
+          className="bg-black text-white hover:bg-gray-800 text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 rounded-none w-full sm:w-auto"
         >
           <Link href="/projects/new">
             <Plus className="h-5 w-5 mr-2" />
@@ -131,8 +131,8 @@ export default function HomePage() {
       </section>
 
       {/* 项目列表 - 极简设计 */}
-      <section className="container mx-auto px-6 py-12">
-        <h3 className="text-2xl font-bold text-black mb-8">我的项目</h3>
+      <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <h3 className="text-xl sm:text-2xl font-bold text-black mb-6 sm:mb-8">我的项目</h3>
 
         {isLoading ? (
           <div className="text-center py-16">
@@ -173,13 +173,13 @@ export default function HomePage() {
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>
-                <CardHeader className="pr-10">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-lg bg-black flex items-center justify-center text-white flex-shrink-0">
+                <CardHeader className="pr-10 sm:pr-12">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-black flex items-center justify-center text-white flex-shrink-0">
                       {PROJECT_ICONS[project.type] || PROJECT_ICONS.custom}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <CardTitle className="text-xl text-black truncate">{project.name}</CardTitle>
+                      <CardTitle className="text-lg sm:text-xl text-black truncate">{project.name}</CardTitle>
                       {project.description && (
                         <CardDescription className="text-gray-600 line-clamp-2">
                           {project.description}

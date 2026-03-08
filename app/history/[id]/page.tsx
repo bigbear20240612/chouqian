@@ -170,51 +170,52 @@ export default function HistoryPage() {
     <div className="min-h-screen bg-white">
       {/* 极简导航 */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+        <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => router.back()}
-                className="text-black"
+                className="text-black flex-shrink-0"
               >
                 <ArrowLeft className="h-5 w-5" />
               </Button>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-black flex items-center justify-center">
-                  <Clock className="h-6 w-6 text-white" />
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-black flex items-center justify-center flex-shrink-0">
+                  <Clock className="h-4 sm:h-6 w-4 sm:w-6 text-white" />
                 </div>
-                <div>
-                  <h1 className="text-xl font-bold text-black">
+                <div className="min-w-0">
+                  <h1 className="text-base sm:text-lg md:text-xl font-bold text-black truncate">
                     {projectName || "历史记录"}
                   </h1>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs sm:text-sm text-gray-600">
                     共 {filteredRecords.length} 条记录
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               {selectedRecords.size > 0 && (
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleBatchDelete}
-                  className="border-gray-300 text-black"
+                  className="border-gray-300 text-black text-xs sm:text-sm px-2 sm:px-3"
                 >
-                  <Trash2 className="h-4 w-4 mr-2" />
-                  删除 ({selectedRecords.size})
+                  <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden sm:inline">删除</span>
+                  <span className="inline sm:hidden">({selectedRecords.size})</span>
                 </Button>
               )}
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleExport}
-                className="border-gray-300 text-black"
+                className="border-gray-300 text-black text-xs sm:text-sm px-2 sm:px-3"
               >
-                <Download className="h-4 w-4 mr-2" />
+                <Download className="h-3 w-3 sm:h-4 sm:w-4" />
                 导出
               </Button>
             </div>

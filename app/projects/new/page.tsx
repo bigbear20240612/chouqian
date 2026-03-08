@@ -111,30 +111,30 @@ export default function NewProjectPage() {
     <div className="min-h-screen bg-white">
       {/* 极简导航 */}
       <header className="border-b border-gray-200 bg-white">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center gap-4">
+        <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Button variant="ghost" size="icon" onClick={() => router.push("/")} className="text-black">
               <ArrowLeft className="h-5 w-5" />
             </Button>
-            <h1 className="text-xl font-bold text-black">创建项目</h1>
+            <h1 className="text-lg sm:text-xl font-bold text-black">创建项目</h1>
           </div>
         </div>
       </header>
 
       {/* 主内容 */}
-      <main className="container mx-auto px-6 py-12 max-w-2xl">
-        <form onSubmit={handleSubmit} className="space-y-8">
+      <main className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-2xl">
+        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
           {/* 基本信息 */}
           <Card className="border border-gray-300 bg-white">
             <CardHeader>
-              <CardTitle className="text-2xl text-black flex items-center gap-2">
-                <Sparkles className="h-6 w-6 text-black" />
+              <CardTitle className="text-xl sm:text-2xl text-black flex items-center gap-2">
+                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-black" />
                 基本信息
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4 sm:space-y-6">
               <div>
-                <Label htmlFor="name" className="text-base font-medium text-black">
+                <Label htmlFor="name" className="text-sm sm:text-base font-medium text-black">
                   项目名称 <span className="text-red-600">*</span>
                 </Label>
                 <Input
@@ -165,10 +165,10 @@ export default function NewProjectPage() {
           {/* 选择类型 */}
           <Card className="border border-gray-300 bg-white">
             <CardHeader>
-              <CardTitle className="text-2xl text-black">选择抽签类型</CardTitle>
+              <CardTitle className="text-xl sm:text-2xl text-black">选择抽签类型</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {PROJECT_TYPES.map((pt) => (
                   <Card
                     key={pt.value}
@@ -203,33 +203,33 @@ export default function NewProjectPage() {
           {type && (
             <Card className="border border-gray-300 bg-white">
               <CardHeader>
-                <CardTitle className="text-2xl text-black">详细配置</CardTitle>
+                <CardTitle className="text-xl sm:text-2xl text-black">详细配置</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-4 sm:space-y-6">
                 {type === "number" && (
-                  <div className="space-y-4">
-                    <h4 className="font-semibold text-base text-black">数字范围</h4>
-                    <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-3 sm:space-y-4">
+                    <h4 className="font-semibold text-sm sm:text-base text-black">数字范围</h4>
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <Label htmlFor="min" className="text-black">最小值</Label>
+                        <Label htmlFor="min" className="text-black text-sm sm:text-base">最小值</Label>
                         <Input
                           id="min"
                           type="number"
                           placeholder="1"
                           value={min}
                           onChange={(e) => setMin(e.target.value)}
-                          className="text-base h-12 border-gray-300 placeholder:text-gray-400"
+                          className="text-base h-10 sm:h-12 border-gray-300 placeholder:text-gray-400"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="max" className="text-black">最大值</Label>
+                        <Label htmlFor="max" className="text-black text-sm sm:text-base">最大值</Label>
                         <Input
                           id="max"
                           type="number"
                           placeholder="100"
                           value={max}
                           onChange={(e) => setMax(e.target.value)}
-                          className="text-base h-12 border-gray-300 placeholder:text-gray-400"
+                          className="text-base h-10 sm:h-12 border-gray-300 placeholder:text-gray-400"
                         />
                       </div>
                     </div>
@@ -237,12 +237,12 @@ export default function NewProjectPage() {
                 )}
 
                 {(type === "name" || type === "custom") && (
-                  <div className="space-y-4">
-                    <h4 className="font-semibold text-base text-black">
+                  <div className="space-y-3 sm:space-y-4">
+                    <h4 className="font-semibold text-sm sm:text-base text-black">
                       {type === "name" ? "学生名单" : "抽签内容"}
                     </h4>
                     <textarea
-                      className="w-full h-40 px-4 py-3 rounded-lg border border-gray-300 bg-white resize-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black placeholder:text-gray-400"
+                      className="w-full h-32 sm:h-40 px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-300 bg-white resize-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black text-sm sm:text-base placeholder:text-gray-400"
                       placeholder={
                         type === "name"
                           ? "张三\\n李四\\n王五\\n..."
@@ -251,15 +251,15 @@ export default function NewProjectPage() {
                       value={items}
                       onChange={(e) => setItems(e.target.value)}
                     />
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       共 {items ? items.split("\\n").filter((i) => i.trim()).length : 0} 项内容
                     </p>
                   </div>
                 )}
 
                 {type === "poem" && (
-                  <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <p className="text-sm text-gray-700">
+                  <div className="p-3 sm:p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <p className="text-xs sm:text-sm text-gray-700">
                       📚 诗词抽签将使用预置的古诗词库，包含唐诗宋词等经典作品。
                     </p>
                   </div>
@@ -269,13 +269,13 @@ export default function NewProjectPage() {
           )}
 
           {/* 提交按钮 */}
-          <div className="flex justify-end gap-4">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-3">
             <Button
               type="button"
               variant="outline"
               size="lg"
               onClick={() => router.push("/")}
-              className="rounded-none border-gray-300 text-black"
+              className="rounded-none border-gray-300 text-black w-full sm:w-auto"
             >
               取消
             </Button>
@@ -283,7 +283,7 @@ export default function NewProjectPage() {
               type="submit"
               size="lg"
               disabled={isLoading || !type}
-              className="bg-black text-white hover:bg-gray-800 rounded-none"
+              className="bg-black text-white hover:bg-gray-800 rounded-none w-full sm:w-auto"
             >
               {isLoading ? "创建中..." : (
                 <>
