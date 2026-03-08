@@ -197,7 +197,16 @@
       "Bash(curl -s -X PUT http://localhost:3000/api/projects \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\n    \"id\": \"108a0d7d-0489-4315-8205-e3f81b6a939f\",\n    \"uiStyle\": \"wheel\"\n  }' | grep -o '\"uiStyle\":\"[^\"]*\"')",
       "Bash(curl -s -X PUT http://localhost:3000/api/projects \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\n    \"id\": \"108a0d7d-0489-4315-8205-e3f81b6a939f\",\n    \"uiStyle\": \"card\"\n  }' > /dev/null && echo \"已恢复为卡片风格\")",
       "Bash(npx dotenv-cli -e .env.local -- npm run build)",
-      "Bash(which vercel && vercel whoami)"
+      "Bash(which vercel && vercel whoami)",
+      "Bash(git commit -m \"$\\(cat <<'EOF'\nfeat: 准备 Vercel 部署\n\n主要更新：\n- 修复 TypeScript 类型错误（global 声明和 DrawConfig）\n- 添加 Vercel 部署配置文件\n- 创建数据库初始化脚本\n- 添加部署指南文档\n- 更新 .gitignore 忽略本地开发文件\n\n技术改进：\n- 添加 types/global.d.ts 支持 global 类型声明\n- 移除对 config.isPoem 的依赖，改用 projectType\n- 配置 Vercel 部署区域为香港（hkg1）\n- 创建数据库种子脚本用于初始化预置数据\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tail -20 app/draw/[id]/page.tsx)",
+      "Bash(wc -l app/draw/[id]/page.tsx)",
+      "Bash(grep -n \"export default\" app/draw/[id]/page.tsx | tail -50)",
+      "Bash(grep -n \"return \\(\" app/draw/[id]/page.tsx)",
+      "Bash(node -e \"const fs = require\\('fs'\\); const content = fs.readFileSync\\('app/draw/[id]/page.tsx', 'utf8'\\); let open = 0, close = 0; for \\(const c of content\\) { if \\(c === '{'\\) open++; if \\(c === '}'\\) close++; } console.log\\('Open:', open, 'Close:', close, 'Diff:', open - close\\);\")",
+      "Bash(head -140 app/draw/[id]/page.tsx | tail -20)",
+      "Bash(npx tsc --noEmit app/draw/[id]/page.tsx 2>&1 | head -20)",
+      "Bash(grep -n \"<main\" app/draw/[id]/page.tsx)"
     ]
   }
 }

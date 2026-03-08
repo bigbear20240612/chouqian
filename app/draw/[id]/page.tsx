@@ -7,7 +7,7 @@ import {
   RotateCcw,
   History as HistoryIcon,
   Sparkles,
-  BarChart3,
+  Settings,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -35,13 +35,12 @@ export default function DrawPage() {
 
   const [isDrawing, setIsDrawing] = useState(false);
   const [result, setResult] = useState<string | number | string[] | null>(null);
-  const [showHistory, setShowHistory] = useState(true);
-  const [historyRecords, setHistoryRecords] = useState<any[]>([]);
+  const [historyCount, setHistoryCount] = useState(0);
 
   useEffect(() => {
     if (projectId) {
       fetchProject();
-      fetchHistory();
+      fetchHistoryCount();
     }
   }, [projectId]);
 
@@ -68,15 +67,15 @@ export default function DrawPage() {
     }
   };
 
-  const fetchHistory = async () => {
+  const fetchHistoryCount = async () => {
     try {
-      const res = await fetch(`/api/draw?projectId=${projectId}&limit=50`);
+      const res = await fetch(`/api/draw?projectId=${projectId}&limit=1000`);
       const data = await res.json();
       if (data.success) {
-        setHistoryRecords(data.data.reverse());
+        setHistoryCount(data.data.length);
       }
     } catch (error) {
-      console.error("获取历史记录失败:", error);
+      console.error("获取历史记录数量失败:", error);
     }
   };
 
@@ -101,7 +100,7 @@ export default function DrawPage() {
         const drawResult = data.data.value;
         setResult(drawResult);
         addDrawResult(drawResult);
-        await fetchHistory();
+        await fetchHistoryCount();
       } else {
         setError(data.error || "抽签失败");
       }
@@ -147,7 +146,7 @@ export default function DrawPage() {
       {/* 极简导航 */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between w-full">
             <div className="flex items-center gap-4">
               <Button variant="ghost" size="icon" onClick={() => router.push("/")} className="text-black">
                 <ArrowLeft className="h-5 w-5" />
@@ -164,15 +163,40 @@ export default function DrawPage() {
                 </div>
               </div>
             </div>
+
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => router.push(`/history/${projectId}`)}
+                className="border-gray-300 text-black"
+              >
+                <HistoryIcon className="h-4 w-4 mr-2" />
+                历史记录
+                {historyCount > 0 && (
+                  <span className="ml-2 px-2 py-0.5 bg-black text-white text-xs rounded-full">
+                    {historyCount}
+                  </span>
+                )}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => router.push(`/edit/${projectId}`)}
+                className="border-gray-300 text-black"
+              >
+                <Settings className="h-4 w-4 mr-2" />
+                编辑
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
       {/* 主内容 */}
       <main className="container mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* 左侧抽签区域 */}
-          <div className="lg:col-span-2">
+        {/* 抽签区域 */}
+        <div className="max-w-3xl mx-auto">
             <Card className="border border-gray-300 bg-white">
               <CardContent className="pt-8">
                 {/* 风格切换 */}
@@ -255,56 +279,6 @@ export default function DrawPage() {
               </CardContent>
             </Card>
           </div>
-
-          {/* 右侧历史记录 */}
-          <div className="lg:col-span-1">
-            <Card className="sticky top-24 border border-gray-300 bg-white">
-              <CardHeader className="pb-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <HistoryIcon className="h-5 w-5 text-black" />
-                    <h3 className="text-lg font-bold text-black">历史记录</h3>
-                  </div>
-                  {historyRecords.length > 0 && (
-                    <span className="text-sm text-gray-600">{historyRecords.length} 次</span>
-                  )}
-                </div>
-              </CardHeader>
-              <CardContent>
-                {historyRecords.length === 0 ? (
-                  <div className="text-center py-12">
-                    <BarChart3 className="h-12 w-12 mx-auto mb-4 text-gray-300" />
-                    <p className="text-sm text-gray-600">暂无记录</p>
-                    <p className="text-xs text-gray-500 mt-1">开始抽签后将显示历史记录</p>
-                  </div>
-                ) : (
-                  <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
-                    {historyRecords.map((record, index) => (
-                      <div
-                        key={record.id}
-                        className="p-3 bg-gray-50 rounded-lg border border-gray-200"
-                      >
-                        <div className="flex items-start justify-between mb-1">
-                          <span className="text-xs font-medium text-black">
-                            #{historyRecords.length - index}
-                          </span>
-                          <span className="text-xs text-gray-600">
-                            {formatDateTime(record.drawnAt)}
-                          </span>
-                        </div>
-                        <p className="font-semibold text-black break-words text-base">
-                          {Array.isArray(record.result.value)
-                            ? record.result.value.join(", ")
-                            : String(record.result.value)}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
       </main>
     </div>
   );

@@ -136,29 +136,38 @@ export default function HomePage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
-              <Link key={project.id} href={`/draw/${project.id}`}>
-                <Card className="border border-gray-300 bg-white hover:border-black transition-all cursor-pointer h-full">
-                  <CardHeader>
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="w-12 h-12 rounded-lg bg-black flex items-center justify-center text-white">
-                        {PROJECT_ICONS[project.type] || PROJECT_ICONS.custom}
-                      </div>
+              <Card key={project.id} className="border border-gray-300 bg-white hover:border-black transition-all h-full">
+                <CardHeader>
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-12 h-12 rounded-lg bg-black flex items-center justify-center text-white">
+                      {PROJECT_ICONS[project.type] || PROJECT_ICONS.custom}
                     </div>
-                    <CardTitle className="text-xl text-black">{project.name}</CardTitle>
-                    {project.description && (
-                      <CardDescription className="text-gray-600 line-clamp-2">
-                        {project.description}
-                      </CardDescription>
-                    )}
-                  </CardHeader>
-                  <CardContent>
+                    <Link href={`/edit/${project.id}`}>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-gray-600 hover:text-black hover:bg-gray-100"
+                      >
+                        <Settings className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                  <CardTitle className="text-xl text-black">{project.name}</CardTitle>
+                  {project.description && (
+                    <CardDescription className="text-gray-600 line-clamp-2">
+                      {project.description}
+                    </CardDescription>
+                  )}
+                </CardHeader>
+                <CardContent>
+                  <Link href={`/draw/${project.id}`} className="block">
                     <div className="flex items-center justify-between text-black">
                       <span className="text-sm text-gray-600">点击开始抽签</span>
                       <ArrowRight className="h-4 w-4" />
                     </div>
-                  </CardContent>
-                </Card>
-              </Link>
+                  </Link>
+                </CardContent>
+              </Card>
             ))}
 
             {/* 新建项目卡片 */}
