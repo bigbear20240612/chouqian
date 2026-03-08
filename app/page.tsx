@@ -11,6 +11,7 @@ import {
   Settings,
   ArrowRight,
   History,
+  Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -56,6 +57,32 @@ export default function HomePage() {
       setProjects([]);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeleteProject = async (projectId: string, projectName: string) => {
+    // 确认删除
+    const confirmed = window.confirm(
+      `确定要删除项目"${projectName}"吗？\n\n此操作将：\n• 删除项目配置\n• 删除所有相关的抽签历史记录\n\n此操作不可撤销！`
+    );
+
+    if (!confirmed) return;
+
+    try {
+      const res = await fetch(`/api/projects?id=${projectId}`, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        // 从本地状态中移除项目
+        setProjects(projects.filter((p) => p.id !== projectId));
+      } else {
+        alert(data.error || "删除失败");
+      }
+    } catch (error) {
+      console.error("删除项目失败:", error);
+      alert("删除项目失败");
     }
   };
 
@@ -137,8 +164,16 @@ export default function HomePage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
-              <Card key={project.id} className="border border-gray-300 bg-white hover:border-black transition-all h-full">
-                <CardHeader>
+              <Card key={project.id} className="border border-gray-300 bg-white hover:border-black transition-all h-full relative group">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => handleDeleteProject(project.id, project.name)}
+                  className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-600 hover:bg-red-50 transition-all"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+                <CardHeader className="pr-10">
                   <div className="flex items-start gap-4 mb-4">
                     <div className="w-12 h-12 rounded-lg bg-black flex items-center justify-center text-white flex-shrink-0">
                       {PROJECT_ICONS[project.type] || PROJECT_ICONS.custom}

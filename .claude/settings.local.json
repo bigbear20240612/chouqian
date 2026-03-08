@@ -206,7 +206,8 @@
       "Bash(node -e \"const fs = require\\('fs'\\); const content = fs.readFileSync\\('app/draw/[id]/page.tsx', 'utf8'\\); let open = 0, close = 0; for \\(const c of content\\) { if \\(c === '{'\\) open++; if \\(c === '}'\\) close++; } console.log\\('Open:', open, 'Close:', close, 'Diff:', open - close\\);\")",
       "Bash(head -140 app/draw/[id]/page.tsx | tail -20)",
       "Bash(npx tsc --noEmit app/draw/[id]/page.tsx 2>&1 | head -20)",
-      "Bash(grep -n \"<main\" app/draw/[id]/page.tsx)"
+      "Bash(grep -n \"<main\" app/draw/[id]/page.tsx)",
+      "Bash(npm run dev)"
     ]
   }
 }

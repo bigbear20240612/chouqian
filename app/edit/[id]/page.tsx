@@ -12,6 +12,7 @@ import {
   X,
   Download,
   Upload,
+  AlertTriangle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -110,6 +111,40 @@ export default function EditProjectPage() {
     } catch (error) {
       console.error("保存失败:", error);
       showMessage("error", "保存失败");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!project) return;
+
+    // 确认删除
+    const confirmed = window.confirm(
+      `确定要删除项目"${project.name}"吗？\n\n此操作将：\n• 删除项目配置\n• 删除所有相关的抽签历史记录\n\n此操作不可撤销！`
+    );
+
+    if (!confirmed) return;
+
+    setSaving(true);
+    try {
+      const res = await fetch(`/api/projects?id=${projectId}`, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        showMessage("success", "项目已删除！");
+        // 延迟跳转，让用户看到成功提示
+        setTimeout(() => {
+          router.push("/");
+        }, 1500);
+      } else {
+        showMessage("error", data.error || "删除失败");
+      }
+    } catch (error) {
+      console.error("删除失败:", error);
+      showMessage("error", "删除失败");
     } finally {
       setSaving(false);
     }
@@ -241,6 +276,16 @@ export default function EditProjectPage() {
               >
                 <Upload className="h-4 w-4 mr-2" />
                 导入
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleDelete}
+                disabled={saving}
+                className="border-red-300 text-red-600 hover:bg-red-50 hover:border-red-400"
+              >
+                <Trash2 className="h-4 w-4 mr-2" />
+                删除项目
               </Button>
               <Button
                 size="sm"
