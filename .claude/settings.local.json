@@ -207,7 +207,8 @@
       "Bash(head -140 app/draw/[id]/page.tsx | tail -20)",
       "Bash(npx tsc --noEmit app/draw/[id]/page.tsx 2>&1 | head -20)",
       "Bash(grep -n \"<main\" app/draw/[id]/page.tsx)",
-      "Bash(npm run dev)"
+      "Bash(npm run dev)",
+      "Bash(grep -n \"placeholder\" app/edit/[id]/page.tsx)"
     ]
   }
 }

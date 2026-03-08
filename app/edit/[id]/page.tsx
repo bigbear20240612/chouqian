@@ -328,7 +328,7 @@ export default function EditProjectPage() {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="border-gray-300"
+                className="border-gray-300 placeholder:text-gray-400"
                 placeholder="输入项目名称"
               />
             </div>
@@ -338,7 +338,7 @@ export default function EditProjectPage() {
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="border-gray-300"
+                className="border-gray-300 placeholder:text-gray-400"
                 placeholder="输入项目描述（可选）"
                 rows={3}
               />
@@ -375,7 +375,7 @@ export default function EditProjectPage() {
                   value={newItem}
                   onChange={(e) => setNewItem(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && handleAddItem()}
-                  className="border-gray-300"
+                  className="border-gray-300 placeholder:text-gray-400"
                   placeholder="输入新的签，按回车添加"
                 />
                 <Button

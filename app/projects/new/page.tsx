@@ -143,7 +143,7 @@ export default function NewProjectPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="text-base h-12 mt-2 border-gray-300"
+                  className="text-base h-12 mt-2 border-gray-300 placeholder:text-gray-400"
                 />
               </div>
 
@@ -156,7 +156,7 @@ export default function NewProjectPage() {
                   placeholder="简单描述这个项目的用途"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="text-base h-12 mt-2 border-gray-300"
+                  className="text-base h-12 mt-2 border-gray-300 placeholder:text-gray-400"
                 />
               </div>
             </CardContent>
@@ -215,9 +215,10 @@ export default function NewProjectPage() {
                         <Input
                           id="min"
                           type="number"
+                          placeholder="1"
                           value={min}
                           onChange={(e) => setMin(e.target.value)}
-                          className="text-base h-12 border-gray-300"
+                          className="text-base h-12 border-gray-300 placeholder:text-gray-400"
                         />
                       </div>
                       <div>
@@ -225,9 +226,10 @@ export default function NewProjectPage() {
                         <Input
                           id="max"
                           type="number"
+                          placeholder="100"
                           value={max}
                           onChange={(e) => setMax(e.target.value)}
-                          className="text-base h-12 border-gray-300"
+                          className="text-base h-12 border-gray-300 placeholder:text-gray-400"
                         />
                       </div>
                     </div>
@@ -240,7 +242,7 @@ export default function NewProjectPage() {
                       {type === "name" ? "学生名单" : "抽签内容"}
                     </h4>
                     <textarea
-                      className="w-full h-40 px-4 py-3 rounded-lg border border-gray-300 bg-white resize-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
+                      className="w-full h-40 px-4 py-3 rounded-lg border border-gray-300 bg-white resize-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black placeholder:text-gray-400"
                       placeholder={
                         type === "name"
                           ? "张三\\n李四\\n王五\\n..."
