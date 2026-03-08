@@ -10,6 +10,7 @@ import {
   Scroll,
   Settings,
   ArrowRight,
+  History,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -138,34 +139,44 @@ export default function HomePage() {
             {projects.map((project) => (
               <Card key={project.id} className="border border-gray-300 bg-white hover:border-black transition-all h-full">
                 <CardHeader>
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-lg bg-black flex items-center justify-center text-white">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-lg bg-black flex items-center justify-center text-white flex-shrink-0">
                       {PROJECT_ICONS[project.type] || PROJECT_ICONS.custom}
                     </div>
-                    <Link href={`/edit/${project.id}`}>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-gray-600 hover:text-black hover:bg-gray-100"
-                      >
-                        <Settings className="h-4 w-4" />
-                      </Button>
-                    </Link>
+                    <div className="flex-1 min-w-0">
+                      <CardTitle className="text-xl text-black truncate">{project.name}</CardTitle>
+                      {project.description && (
+                        <CardDescription className="text-gray-600 line-clamp-2">
+                          {project.description}
+                        </CardDescription>
+                      )}
+                    </div>
                   </div>
-                  <CardTitle className="text-xl text-black">{project.name}</CardTitle>
-                  {project.description && (
-                    <CardDescription className="text-gray-600 line-clamp-2">
-                      {project.description}
-                    </CardDescription>
-                  )}
                 </CardHeader>
                 <CardContent>
-                  <Link href={`/draw/${project.id}`} className="block">
-                    <div className="flex items-center justify-between text-black">
-                      <span className="text-sm text-gray-600">点击开始抽签</span>
-                      <ArrowRight className="h-4 w-4" />
+                  <div className="space-y-2">
+                    <Link href={`/draw/${project.id}`} className="block">
+                      <Button className="w-full bg-black text-white hover:bg-gray-800 justify-start" variant="default">
+                        <Sparkles className="h-4 w-4 mr-2" />
+                        开始抽签
+                        <ArrowRight className="h-4 w-4 ml-auto" />
+                      </Button>
+                    </Link>
+                    <div className="grid grid-cols-2 gap-2">
+                      <Link href={`/history/${project.id}`}>
+                        <Button variant="outline" size="sm" className="w-full border-gray-300 text-black hover:bg-gray-50">
+                          <History className="h-4 w-4 mr-2" />
+                          历史记录
+                        </Button>
+                      </Link>
+                      <Link href={`/edit/${project.id}`}>
+                        <Button variant="outline" size="sm" className="w-full border-gray-300 text-black hover:bg-gray-50">
+                          <Settings className="h-4 w-4 mr-2" />
+                          编辑
+                        </Button>
+                      </Link>
                     </div>
-                  </Link>
+                  </div>
                 </CardContent>
               </Card>
             ))}
